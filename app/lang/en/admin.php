@@ -45,5 +45,10 @@ return array(
 	"photo_active" => "Photo Active",
 	"title" => "Title",
 	"email" => "Email",
-	"manage_users" => "Manage Users"
+	"manage_users" => "Manage Users",
+	"first_name" => "First Name",
+	"last_name" => "Last Name",
+	"email" => "Email",
+	"user_id" => "User ID",
+	"edit_user" => "Edit User"
 );

@@ -30,7 +30,7 @@
 	  					<td>{{ $user->updated_at }}</td>
 	  					<td>{{ $user->created_at }}</td>
 	  					<td>
-	  						<a href="#" class="btn btn-primary btn-sm">{{ trans('admin.edit') }}</a>
+	  						<a href="{{ url('admin/user/edit/'.$user->id) }}" class="btn btn-primary btn-sm">{{ trans('admin.edit') }}</a>
 	  						<button class="btn btn-danger btn-sm btn-delete" data-userid="{{ $user->id }}" data-toggle="modal" data-target="#AlertModal">{{ trans('admin.delete') }}</button>
 	  					</td>
 	  				</tr>
