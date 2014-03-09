@@ -48,13 +48,18 @@ Route::get('/admin/dashboard',  array('before' => 'admin', 'uses' => 'AdminContr
 
 Route::get('/admin/comment',  array('before' => 'admin', 'uses' => 'AdminCommentController@Index'));
 
+Route::get('/admin/photo',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Index'));
+
 Route::any('/admin/comment/edit/{id}',  array('before' => 'admin|comment', 'uses' => 'AdminCommentController@Edit'));
+Route::any('/admin/photo/edit/{id}',  array('before' => 'admin|photo', 'uses' => 'AdminPhotoController@Edit'));
 
 Route::get('/admin/user',  array('before' => 'admin', 'uses' => 'AdminUserController@Index'));
 
 Route::any('/admin/comment/ajax/active',  array('before' => 'admin', 'uses' => 'AdminCommentController@Active'));
+Route::any('/admin/photo/ajax/active',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Active'));
 
 Route::any('/admin/comment/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminCommentController@Delete'));
+Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
 
 Route::get('/admin/user/{id}',  function($id)
 {	

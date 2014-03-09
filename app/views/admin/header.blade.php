@@ -22,10 +22,10 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('/admin/user')}}"><i class="glyphicon glyphicon-user"></i> Users</a></li>
-                        <li><a href="{{url('/admin/comment')}}"><i class="glyphicon glyphicon-comment"></i> Comments</a></li>
-                        <li><a href="{{url('/admin/comment')}}"><i class="glyphicon glyphicon-picture"></i> Images</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-wrench"></i> System</a></li>                       
+                        <li><a href="{{url('/admin/user')}}"><i class="glyphicon glyphicon-user"></i> {{ trans('admin.users') }}</a></li>
+                        <li><a href="{{url('/admin/comment')}}"><i class="glyphicon glyphicon-comment"></i> {{ trans('admin.comments') }}</a></li>
+                        <li><a href="{{url('/admin/photo')}}"><i class="glyphicon glyphicon-picture"></i> {{ trans('admin.photos') }}</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-wrench"></i> {{ trans('admin.system') }}</a></li>                       
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown">

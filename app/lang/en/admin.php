@@ -32,5 +32,16 @@ return array(
 	"message_delete" => "Record has been deleted succesfuly.",
 	"comment_active" => "Comment Active",
 	"message" => "Message",
-	"error" => "Error"
+	"error" => "Error",
+	"comments" => "Comments",
+	"users" => "Users",
+	"photos" => "Photos",
+	"system" => "System",
+	"titel" => "Title",
+	"manage_photos" => "Manage Photos",
+	"photo_id" => "Photo ID",
+	"edit_photo" => "Edit Photo",
+	"photo_title" => "Photo Title",
+	"photo_active" => "Photo Active",
+	"title" => "Title"
 );
