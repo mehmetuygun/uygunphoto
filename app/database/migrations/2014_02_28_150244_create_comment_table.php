@@ -17,7 +17,8 @@ class CreateCommentTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->integer('image_id');
-			$table->string('description', 140);
+			$table->string('description', 255);
+			$table->boolean('active');
 			$table->timestamps();
 		});
 	}
