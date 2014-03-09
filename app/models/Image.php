@@ -1,0 +1,144 @@
+<?php
+
+class Image extends Eloquent {
+
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'image';
+	public $error;
+	public $_web_width;
+	public $_web_height;
+	public $_thumbnail_name;
+	public $_web_name;
+	public $_original_name;
+
+	public function upload($image_file)
+	{
+		if($this->isImage($image_file) 
+			&& $this->createThubmnail($image_file, $thumbnailName = uniqid(true)) 
+			&& $this->webImage($image_file, $webImageName = uniqid(true)) 
+			&& $this->original($image_file, $originalName = uniqid(true))) {
+				return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function original($file, $fileName)
+	{
+		if(Image_lib::make($file->getRealPath())->save(base_path().'/public/img/original/'.$fileName.'.jpg')) {
+			$this->_original_name = $fileName.'.jpg';
+			return true;
+		}
+		$this->error = lang::get('error.wrong');
+		return false;
+	}
+
+	public function isImage($file)
+	{
+		if($file->getMimeType() == 'image/jpeg')
+			return true;
+		$this->error = lang::get('error.not_image');
+		return false;
+	}
+
+	public function createThubmnail($file, $fileName)
+	{
+		$image = Image_lib::make($file->getRealPath());
+
+		$this->_thumbnail_name = $fileName.'.jpg';
+
+		if($image->width > $image->height) {
+			$small_side = $image->height;
+			$crop_size = $image->width - $image->height;
+			$crop_x = $crop_size / 2;
+			$crop_y = 0;
+			$crop_range = $image->height;
+		} elseif($image->width < $image->height) {
+			$small_side = $image->width;
+			$crop_size = $image->height - $image->width;
+			$crop_x = 0;
+			$crop_y = $crop_size / 2;
+			$crop_range = $image->width;
+		} else {
+			$small_side = $image->width;
+			$crop_x = 0;
+			$crop_y = 0;
+			$crop_range = $image->width;
+		}
+
+		if($image->crop($small_side, $small_side, $crop_x, $crop_y)->resize(160, 160)->save(base_path().'/public/img/thumbnail/'.$fileName.'.jpg'))
+			return true;
+
+		$this->error = lang::get('error.wrong');
+		return false;
+	}
+
+	public function webImage($file, $fileName)
+	{
+		$image = Image_lib::make($file->getRealPath());
+
+		$this->_web_name = $fileName.'.jpg';
+
+		if($image->width > $image->height) {
+			$ratio = $image->width / $image->height;
+		} else {
+			$ratio = $image->height / $image->width;
+		}
+
+		if($image->width > 1024) {
+			$img_width = 1024;
+			$img_height = 1024 / $ratio;
+		} elseif($image->height > 1024){
+			$img_width = 1024 / $ratio;
+			$img_height = $image->height;
+		} else {
+			$img_width = $image->width;
+			$img_height = $image->height;
+		}
+
+		$img_height = round($img_height);
+		$img_width = round($img_width);
+
+		if($image->resize($img_width, $img_height)->save(base_path().'/public/img/web/'.$fileName.'.jpg')) {
+			$this->_web_width = $img_width;
+			$this->_web_height = $img_height;
+			return true;
+		} else {
+			$this->error = lang::get('error.wrong');
+			return false;
+		}
+	}
+
+	public function getImages($limit) {
+		$image = DB::table($this->table)
+		->where('publish', 1)
+		->orderBy('created_at', 'DESC')
+		->paginate($limit);
+		return $image;
+	}
+
+	public function getLastImages($limit) {
+		$image = DB::table($this->table)
+		->where('publish', 1)
+		->orderBy('created_at', 'DESC')
+		->limit($limit)
+		->get();
+		return $image;
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('User');
+	}
+
+	public function comment()
+	{
+		return $this->hasMany('Comment');
+	}
+}
+
+?>

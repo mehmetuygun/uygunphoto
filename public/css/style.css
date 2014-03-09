@@ -1,0 +1,226 @@
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+    background-color: rgb(68, 68, 68);
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -60px;
+    /* Pad bottom by footer height */
+    padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+    height: 60px;
+    background-color: #101010;
+}
+#content {
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+.p {
+    padding: 15px;
+}
+
+.img_gallery li {
+    width: 200px;
+    min-height: 250px;
+    border: 1px solid #000;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    zoom: 1;
+    *display: inline;
+    _height: 250px;
+}
+.panel-body {
+    background-color: white;
+}
+.thumbnail {
+    width: 170px;
+    height: 170px;
+}
+.photo-frame {
+    background-color: black;
+    padding-top: 20px;
+    border-radius: 4px;
+}
+.photo_info {
+    color: gray;
+}
+@media screen and (max-width: 400px) {
+    .thumbnail {
+        width: 90px;
+        height: 90px;
+    }
+    .thumbnail img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.load_more {
+    width: 100%;
+}
+
+.panel-black {
+    border-radius: 4px;
+    background-color: #101010;
+}
+.comment_button {
+    margin-top: 15px;
+}
+
+#comment_area {
+    padding: 5px;
+    width: 100%;
+}
+.comment_body {
+    font-size: 12px;
+}
+.comment_time {
+    font-size: 11px;
+    color: gray;
+}
+.profile {
+    border: 1px solid gray;
+}
+
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.scrollableComment {
+    max-height: 100%;
+    height: auto;
+    overflow-y: scroll;
+}
+.web_image {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 100%;
+}
+
+#comment_box {
+    padding-right: 0px;
+    background-color: #101010;
+    max-height: 100%;
+    height: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    margin-bottom: 5px;
+}
+
+#comment_box h4 {
+    margin: 0;
+    color: whitesmoke;
+}
+
+#commnet {
+    max-height: 100%;
+}
+
+#content #photo {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #101010;
+    -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.56);
+    -moz-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.56);
+    box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.56);
+}
+
+#content #photo .col-xs-12, .col-sm-6, .col-md-8{
+    height: 100%;
+}
+
+#img_box {
+    padding-right: 0px;
+    padding-left: 0px;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.back {
+    position: absolute;
+    top: 50%;
+    height: 2em;
+    margin-top: -3em;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+#comment_description {
+    resize: none;
+    background-color: black;
+    color: white;
+}
+
+#comment_description::-webkit-input-placeholder {
+    color: white;
+}    
+#comment_description:-moz-placeholder {
+    color: white;
+}
+#comment_description::-moz-placeholder {
+    color: white;
+}    
+#comment_description:-ms-input-placeholder {
+    color: white;
+}
+
+.comment_frame a{
+    color: gray;
+}
+
+.comment_frame p{
+    color: whiteSmoke;
+    font-size: 12px;
+}
+
+.comment_frame {
+    min-height: 270px;
+    overflow-y: scroll;
+    border-top: 1px solid gray;
+    padding-top: 10px;
+    height: 270px;
+}
+.comment_frame .media{
+    margin-top: 5px;
+}
+.panel-body {
+    background-color: #101010;
+    border-radius: 0 0 4px 4px;
+}
+
+.date {
+    font-size: 12px;
+}
+
+.media-object {
+    background-color: white;
+}
+.media h3 {
+    color: #999;
+}
+.profile_content {
+    border-top: 1px solid gray;
+    padding-top: 10px;
+    margin-top: 10px;
+}
