@@ -59,6 +59,7 @@ Route::any('/admin/comment/ajax/active',  array('before' => 'admin', 'uses' => '
 Route::any('/admin/photo/ajax/active',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Active'));
 
 Route::any('/admin/comment/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminCommentController@Delete'));
+Route::any('/admin/user/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminUserController@Delete'));
 Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
 
 Route::get('/admin/user/{id}',  function($id)
