@@ -93,12 +93,17 @@ Route::filter('admin', function()
 	}
 });
 
-Route::filter('image', function()
+Route::filter('image', function( $route, $request )
 {
-	if (Image::where('id', '=', Request::segment(2))->where('publish', '=', 1)->count() < 1) return Redirect::to('/'); 
+	if (Image::where('id', '=', $route->getParameter('id'))->where('publish', '=', 1)->count() < 1) return Redirect::to('/'); 
 });
 
-Route::filter('profile', function()
+Route::filter('profile', function( $route, $request )
 {
-	if (User::where('id', '=', Request::segment(2))->count() < 1) return Redirect::to('/');
+	if (User::where('id', '=', $route->getParameter('id'))->count() < 1) return Redirect::to('/');
+});
+
+Route::filter('comment', function( $route, $request )
+{
+	if (Comment::where('id', '=', $route->getParameter('id'))->count() < 1) return Redirect::to('/admin/dashboard');
 });

@@ -48,7 +48,7 @@ Route::get('/admin/dashboard',  array('before' => 'admin', 'uses' => 'AdminContr
 
 Route::get('/admin/comment',  array('before' => 'admin', 'uses' => 'AdminCommentController@Index'));
 
-Route::any('/admin/comment/edit/{id}',  array('before' => 'admin', 'uses' => 'AdminCommentController@Edit'));
+Route::any('/admin/comment/edit/{id}',  array('before' => 'admin|comment', 'uses' => 'AdminCommentController@Edit'));
 
 Route::get('/admin/user',  array('before' => 'admin', 'uses' => 'AdminUserController@Index'));
 
