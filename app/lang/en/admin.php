@@ -29,5 +29,8 @@ return array(
 	"updated_at" => "Updated At",
 	"update_message" => "Your changes has been updated succesfuly.",
 	"went_wrong" => "Something went wrong. Please try again.",
-	"message_delete" => "Record has been deleted succesfuly."
+	"message_delete" => "Record has been deleted succesfuly.",
+	"comment_active" => "Comment Active",
+	"message" => "Message",
+	"error" => "Error"
 );

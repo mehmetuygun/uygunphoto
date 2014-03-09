@@ -47,10 +47,43 @@ class AdminCommentController extends BaseController
 		$data['comment'] = Comment::find($id);
 
 		if(Request::isMethod('post')) {
+			$rules = array(
+				'description' => 'required|between:1,255',
+				'active' => 'required|in:1,0'
+			);
+
+			$label = array(
+				'description' => Lang::get('admin.comment_description'),
+				'active' => Lang::get('admin.comment_active')
+			);
+
+			$validator = Validator::make(Input::all(), $rules, array(), $label);
+
+			$data['messages'] = $validator->messages();
+
+			if ($validator->fails()) {
+				Input::flash();
+			} else {
+				$comment = Comment::find($id);
+				$comment->description = Input::get('description');
+				$comment->active = Input::get('active');
+				if($comment->save()) {
+					Input::flash();
+					$data['is_message'] = true;
+					$data['alert_message'] = Lang::get('admin.update_message');
+					$data['alert_type'] = "alert-success";
+					$data['alert_name'] = Lang::get('admin.message');
+				} else {
+					$data['is_message'] = true;
+					$data['alert_message'] = Lang::get('admin.went_wrong');
+					$data['alert_type'] = "alert-danger";
+					$data['alert_name'] = Lang::get('admin.error');
+				}
+			}
 
 		}
 
-		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js");
+		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.js");
 
 		return View::make('admin/comment_edit')->with($data);
 	}

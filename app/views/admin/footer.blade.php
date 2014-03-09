@@ -35,7 +35,7 @@
 		<script type="text/javascript">
 			$(function() {
 				$('[data-toggle=tooltip]').tooltip({trigger:'hover'});
-
+				$('.btn-group').button();
 			});
 			
 			function showAlert(alert_class, message, alert_body)

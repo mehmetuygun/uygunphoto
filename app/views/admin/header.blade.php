@@ -48,3 +48,9 @@
         <div class="alert" style="display: none">
             <strong class="alert-title">Message:</strong> <span class="alert-body">Your changes has been updated.</span>
         </div>
+        @if(isset($is_message) && $is_message)
+            <div class="alert {{$alert_type}}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{ $alert_name }}:</strong> {{ $alert_message }}
+            </div>
+        @endif
