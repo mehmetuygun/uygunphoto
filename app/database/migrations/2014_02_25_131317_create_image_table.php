@@ -23,6 +23,7 @@ class CreateImageTable extends Migration {
 			$table->integer('web_height');
 			$table->string('original_name', 128);
 			$table->integer('user_id');
+			$table->integer('banner_id');
 			$table->boolean('active');
 			$table->timestamps();
 		});

@@ -115,7 +115,7 @@ class Image extends Eloquent {
 
 	public function getImages($limit) {
 		$image = DB::table($this->table)
-		->where('publish', 1)
+		->where('active', 1)
 		->orderBy('created_at', 'DESC')
 		->paginate($limit);
 		return $image;
@@ -123,7 +123,7 @@ class Image extends Eloquent {
 
 	public function getLastImages($limit) {
 		$image = DB::table($this->table)
-		->where('publish', 1)
+		->where('active', 1)
 		->orderBy('created_at', 'DESC')
 		->limit($limit)
 		->get();
@@ -138,6 +138,11 @@ class Image extends Eloquent {
 	public function comment()
 	{
 		return $this->hasMany('Comment');
+	}
+
+	public function banner()
+	{
+		return $this->belongsTo('banner');
 	}
 }
 

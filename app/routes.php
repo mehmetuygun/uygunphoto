@@ -62,11 +62,19 @@ Route::any('/admin/system/configuration',  array('before' => 'admin', 'uses' => 
 Route::get('/admin/user',  array('before' => 'admin', 'uses' => 'AdminUserController@Index'));
 
 Route::any('/admin/comment/ajax/active',  array('before' => 'admin', 'uses' => 'AdminCommentController@Active'));
+
 Route::any('/admin/photo/ajax/active',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Active'));
 
+
+Route::any('/admin/component/banner/ajax/active',  array('before' => 'admin', 'uses' => 'AdminComponentController@Active'));
+
 Route::any('/admin/comment/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminCommentController@Delete'));
+
 Route::any('/admin/user/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminUserController@Delete'));
+
 Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
+
+Route::any('/admin/component/banner/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminComponentController@Delete'));
 
 Route::get('/email', function() 
 {

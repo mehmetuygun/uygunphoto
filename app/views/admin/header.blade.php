@@ -27,6 +27,13 @@
                         <li><a href="{{url('/admin/photo')}}"><i class="glyphicon glyphicon-picture"></i> {{ trans('admin.photos') }}</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-wrench"></i> {{ trans('admin.component') }}</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url('admin/component/banner')}}">{{ trans('admin.banner') }}</a></li>
+                            </ul>
+                        </li>                       
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-wrench"></i> {{ trans('admin.system') }}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{url('admin/system/configuration')}}">{{ trans('admin.configuration') }}</a></li>
@@ -34,13 +41,6 @@
                                 <li><a href="{{ url('/admin/help') }}">{{ trans('admin.help') }}</a></li>
                             </ul>
                         </li>                           
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-wrench"></i> {{ trans('admin.component') }}</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{url('admin/component/banner')}}">{{ trans('admin.banner') }}</a></li>
-                            </ul>
-                        </li>                       
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown">

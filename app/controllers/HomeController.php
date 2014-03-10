@@ -120,7 +120,7 @@ class HomeController extends BaseController {
 			$image = new Image;
 			$image->title = Input::get('title');
 			$image->user_id = Auth::user()->id;
-			$image->publish = 1;
+			$image->active = 1;
 			$image->web_string = 'width="'.$web_width.'" height="'.$web_height.'"';
 			$image->web_width = $web_width;
 			$image->web_height = $web_height;
