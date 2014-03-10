@@ -53,6 +53,8 @@ Route::get('/admin/photo',  array('before' => 'admin', 'uses' => 'AdminPhotoCont
 Route::any('/admin/comment/edit/{id}',  array('before' => 'admin|comment', 'uses' => 'AdminCommentController@Edit'));
 Route::any('/admin/photo/edit/{id}',  array('before' => 'admin|photo', 'uses' => 'AdminPhotoController@Edit'));
 Route::any('/admin/user/edit/{id}',  array('before' => 'admin', 'uses' => 'AdminUserController@Edit'));
+Route::any('/admin/user/profile',  array('before' => 'admin', 'uses' => 'AdminUserController@Profile'));
+Route::any('/admin/user/password',  array('before' => 'admin', 'uses' => 'AdminUserController@Password'));
 
 Route::get('/admin/user',  array('before' => 'admin', 'uses' => 'AdminUserController@Index'));
 
@@ -63,10 +65,16 @@ Route::any('/admin/comment/ajax/delete',  array('before' => 'admin', 'uses' => '
 Route::any('/admin/user/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminUserController@Delete'));
 Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
 
-Route::get('/admin/user/{id}',  function($id)
-{	
-	$user = User::find($id);
-	return $user->first_name;
+Route::get('/email', function() 
+{
+	return View::make('email/reminder');
+
+	// $data = array();
+
+	// Mail::send('email.basic', $data, function($message)
+	// {
+ //    	$message->to('mehmet.uygun@outlook.com', 'John Smith')->subject('Welcome!');
+	// });
 });
 
 App::missing(function($exception) {

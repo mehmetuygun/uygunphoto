@@ -87,4 +87,120 @@ class AdminUserController extends BaseController
 
 		return View::make('admin/user_edit')->with($data);
 	}
+
+	public function Profile()
+	{
+
+		$data = array();
+
+		$data['user'] = User::find(Auth::user()->id);
+
+		if(Request::isMethod('post')) {
+			$rules = array(
+				'first_name' => 'required|alpha|digits_between:2,64',
+				'last_name' => 'required|alpha|digits_between:2,64',
+				'email' => 'required|email|unique:user',
+			);
+
+			$label = array(
+				'first_name' => Lang::get('admin.first_name'),
+				'last_name' => Lang::get('admin.last_name'),
+				'email' => Lang::get('admin.email'),
+			);
+
+			foreach ($rules as $key => $value) {
+				if($data['user']->$key == Input::get($key))
+					unset($rules[$key]);
+			}			
+
+			$validator = Validator::make(Input::all(), $rules, array(), $label);
+
+			$data['messages'] = $validator->messages();
+
+			if ($validator->fails()) {
+				Input::flash();
+			} else {
+				$user = User::find(Auth::user()->id);
+				$user->first_name = Input::get('first_name');
+				$user->last_name = Input::get('last_name');
+				$user->email = Input::get('email');
+				if($user->save()) {
+					Input::flash();
+					$data['is_message'] = true;
+					$data['alert_message'] = Lang::get('admin.update_message');
+					$data['alert_type'] = "alert-success";
+					$data['alert_name'] = Lang::get('admin.message');
+				} else {
+					$data['is_message'] = true;
+					$data['alert_message'] = Lang::get('admin.went_wrong');
+					$data['alert_type'] = "alert-danger";
+					$data['alert_name'] = Lang::get('admin.error');
+				}
+			}
+
+		}
+
+		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.js");
+
+		return View::make('admin/user_profile')->with($data);
+	}
+	public function Password()
+	{
+
+		$data = array();
+		$data['is_message'] = 0;
+
+		if(Request::isMethod('post')) {
+			$rules = array(
+				'current_password' => 'required|passcheck',
+				'new_password' => 'required|alpha_dash|digits_between:8,64',
+				'confirm_password' => 'required|same:new_password',
+			);
+
+			$label = array(
+				'current_password' => Lang::get('admin.password'),
+				'confirm_password' => Lang::get('admin.confirm_password'),
+				'new_password' => Lang::get('admin.new_password'),
+			);
+
+			Validator::extend('passcheck', function($attribute, $value, $parameters)
+			{
+				if (Hash::check(Input::get('current_password'), User::find(Auth::user()->id)->getAuthPassword())) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+			$validator = Validator::make(Input::all(), $rules, array('passcheck'=>Lang::get('admin.password_validation_error')), $label);
+
+
+
+			$data['messages'] = $validator->messages();
+
+			if ($validator->fails()) {
+				Input::flash();
+			} else {
+				$user = User::find(Auth::user()->id);
+				$user->password = Hash::make(Input::get('new_password'));
+				if($user->save()) {
+					Input::flash();
+					$data['is_message'] = true;
+					$data['alert_message'] = Lang::get('admin.update_message');
+					$data['alert_type'] = "alert-success";
+					$data['alert_name'] = Lang::get('admin.message');
+				} else {
+					$data['is_message'] = true;
+					$data['alert_message'] = Lang::get('admin.went_wrong');
+					$data['alert_type'] = "alert-danger";
+					$data['alert_name'] = Lang::get('admin.error');
+				}
+			}
+
+		}
+
+		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.js");
+
+		return View::make('admin/user_password')->with($data);
+	}
 }

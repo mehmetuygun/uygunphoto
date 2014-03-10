@@ -35,7 +35,8 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">{{ trans('admin.setting') }}</a></li>
+                                <li><a href="{{url('admin/user/profile')}}">{{ trans('admin.edit_profile') }}</a></li>
+                                <li><a href="{{url('admin/user/password')}}">{{ trans('admin.change_password') }}</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{{ url('/admin/logout') }}">{{ trans('admin.logout') }}</a></li>
                             </ul>

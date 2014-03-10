@@ -50,5 +50,13 @@ return array(
 	"last_name" => "Last Name",
 	"email" => "Email",
 	"user_id" => "User ID",
-	"edit_user" => "Edit User"
+	"edit_user" => "Edit User",
+	"setting" => "Setting",
+	"edit_profile" => "Edit Profile",
+	"change_password" => "Change Password",
+	"password" => "Password",
+	"new_password" => "New Password",
+	"confirm_password" => "Confirm Password",
+	"current_password" => "Current Password",
+	"password_validation_error" => "The password did not match."
 );
