@@ -55,6 +55,9 @@ Route::any('/admin/photo/edit/{id}',  array('before' => 'admin|photo', 'uses' =>
 Route::any('/admin/user/edit/{id}',  array('before' => 'admin', 'uses' => 'AdminUserController@Edit'));
 Route::any('/admin/user/profile',  array('before' => 'admin', 'uses' => 'AdminUserController@Profile'));
 Route::any('/admin/user/password',  array('before' => 'admin', 'uses' => 'AdminUserController@Password'));
+Route::any('/admin/component/banner',  array('before' => 'admin', 'uses' => 'AdminComponentController@Banner'));
+
+Route::any('/admin/system/configuration',  array('before' => 'admin', 'uses' => 'AdminSystemController@Configuration'));
 
 Route::get('/admin/user',  array('before' => 'admin', 'uses' => 'AdminUserController@Index'));
 
@@ -75,6 +78,18 @@ Route::get('/email', function()
 	// {
  //    	$message->to('mehmet.uygun@outlook.com', 'John Smith')->subject('Welcome!');
 	// });
+});
+
+Route::get('/mysql', function() 
+{
+	Schema::create('banner', function($table)
+	{
+		$table->increments('id')->unsigned();
+		$table->string('title', 32);
+		$table->string('sort', 32);
+		$table->string('type', 32);
+		$table->timestamps();
+	});
 });
 
 App::missing(function($exception) {

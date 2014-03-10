@@ -1,17 +1,10 @@
 @include('admin/header')
 <div class="panel panel-info">
 	<div class="panel-heading">
-		<h3 class="panel-title">{{ trans('admin.setting') }}</h3>
+		<h3 class="panel-title">{{ trans('admin.edit_profile') }}</h3>
 	</div>
 	<div class="panel-body">
 		<form action="" method="POST" class="form-horizontal" role="form">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="user_id">{{ trans('admin.user_id') }}</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">{{ $user->id }}</p>
-					<!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
-				</div>
-			</div>
 			<div class="form-group @if (isset($messages) && $messages->has('first_name')) has-error @endif">
 				<label class="control-label col-sm-2" for="user_first_name">{{ trans('admin.first_name') }}</label>
 				<div class="col-sm-10">

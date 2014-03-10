@@ -58,5 +58,9 @@ return array(
 	"new_password" => "New Password",
 	"confirm_password" => "Confirm Password",
 	"current_password" => "Current Password",
-	"password_validation_error" => "The password did not match."
+	"configuration" => "Configuration",
+	"help" => "Help",
+	"password_validation_error" => "The password did not match.",
+	"component" => "Component",
+	"banner" => "Banner"
 );

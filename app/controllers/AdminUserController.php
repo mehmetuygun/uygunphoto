@@ -64,8 +64,8 @@ class AdminUserController extends BaseController
 				Input::flash();
 			} else {
 				$user = User::find($id);
-				$user->first_name = Input::get('first_name');
-				$user->last_name = Input::get('last_name');
+				$user->first_name = ucfirst(strtolower(Input::get('first_name')));
+				$user->last_name = ucfirst(strtolower(Input::get('last_name')));
 				$user->email = Input::get('email');
 				if($user->save()) {
 					Input::flash();
@@ -121,8 +121,8 @@ class AdminUserController extends BaseController
 				Input::flash();
 			} else {
 				$user = User::find(Auth::user()->id);
-				$user->first_name = Input::get('first_name');
-				$user->last_name = Input::get('last_name');
+				$user->first_name = ucfirst(strtolower(Input::get('first_name')));
+				$user->last_name = ucfirst(strtolower(Input::get('last_name')));
 				$user->email = Input::get('email');
 				if($user->save()) {
 					Input::flash();
