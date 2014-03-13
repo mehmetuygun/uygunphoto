@@ -19,7 +19,7 @@ class HomeController extends BaseController {
 	{
 
 		$data = array(
-			"js" => array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js", "js/xhr2.js", "js/upload.js", "js/photo.js")
+			"js" => array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js", "js/xhr2.js", "js/upload.js")
 		);
 		
 		$image = new Image;

@@ -51,26 +51,7 @@ class Image extends Eloquent {
 
 		$this->_thumbnail_name = $fileName.'.jpg';
 
-		if($image->width > $image->height) {
-			$small_side = $image->height;
-			$crop_size = $image->width - $image->height;
-			$crop_x = $crop_size / 2;
-			$crop_y = 0;
-			$crop_range = $image->height;
-		} elseif($image->width < $image->height) {
-			$small_side = $image->width;
-			$crop_size = $image->height - $image->width;
-			$crop_x = 0;
-			$crop_y = $crop_size / 2;
-			$crop_range = $image->width;
-		} else {
-			$small_side = $image->width;
-			$crop_x = 0;
-			$crop_y = 0;
-			$crop_range = $image->width;
-		}
-
-		if($image->crop($small_side, $small_side, $crop_x, $crop_y)->resize(160, 160)->save(base_path().'/public/img/thumbnail/'.$fileName.'.jpg'))
+		if($image->grab(450, 300)->save(base_path().'/public/img/thumbnail/'.$fileName.'.jpg'))
 			return true;
 
 		$this->error = lang::get('error.wrong');

@@ -51,10 +51,15 @@ Route::get('/admin/comment',  array('before' => 'admin', 'uses' => 'AdminComment
 Route::get('/admin/photo',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Index'));
 
 Route::any('/admin/comment/edit/{id}',  array('before' => 'admin|comment', 'uses' => 'AdminCommentController@Edit'));
+
 Route::any('/admin/photo/edit/{id}',  array('before' => 'admin|photo', 'uses' => 'AdminPhotoController@Edit'));
+
 Route::any('/admin/user/edit/{id}',  array('before' => 'admin', 'uses' => 'AdminUserController@Edit'));
+
 Route::any('/admin/user/profile',  array('before' => 'admin', 'uses' => 'AdminUserController@Profile'));
+
 Route::any('/admin/user/password',  array('before' => 'admin', 'uses' => 'AdminUserController@Password'));
+
 Route::any('/admin/component/banner',  array('before' => 'admin', 'uses' => 'AdminComponentController@Banner'));
 
 Route::any('/admin/system/configuration',  array('before' => 'admin', 'uses' => 'AdminSystemController@Configuration'));
@@ -64,7 +69,6 @@ Route::get('/admin/user',  array('before' => 'admin', 'uses' => 'AdminUserContro
 Route::any('/admin/comment/ajax/active',  array('before' => 'admin', 'uses' => 'AdminCommentController@Active'));
 
 Route::any('/admin/photo/ajax/active',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Active'));
-
 
 Route::any('/admin/component/banner/ajax/active',  array('before' => 'admin', 'uses' => 'AdminComponentController@Active'));
 
@@ -78,27 +82,21 @@ Route::any('/admin/component/banner/ajax/delete',  array('before' => 'admin', 'u
 
 Route::get('/email', function() 
 {
-	return View::make('email/reminder');
 
-	// $data = array();
+	$data = array();
+	$data['header'] = "Amcığa";
+	$data['content'] = ":P";
 
-	// Mail::send('email.basic', $data, function($message)
-	// {
- //    	$message->to('mehmet.uygun@outlook.com', 'John Smith')->subject('Welcome!');
-	// });
-});
-
-Route::get('/mysql', function() 
-{
-	Schema::create('banner', function($table)
+	Mail::send('email.basic', $data, function($message)
 	{
-		$table->increments('id')->unsigned();
-		$table->string('title', 32);
-		$table->string('sort', 32);
-		$table->string('type', 32);
-		$table->timestamps();
+    	$message->to('ufokaradagli@gmail.com', 'John Smith')->subject('Welcome!');
 	});
 });
+
+// Route::get('/test', function() {
+// 	$number = ;
+// 	echo round($number, 0);
+// });
 
 App::missing(function($exception) {
 	return '404';
