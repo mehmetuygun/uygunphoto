@@ -2,12 +2,11 @@ $(document).ready(function(){
 
     var error_type = $("#error_type").val();
     var valid = true;
-    var upload_link = $("#upload_link").val();
+    var url = $("#url").val();
+    var upload_link = url+'/upload';
     var error_title_length;
-    var modal_body = $('#modal-body').clone();
-    var public_path = $('#public_path').val();
+    var modal_body = $('#modal-body').html();
     var new_upload = $('#new_upload').val();
-    var path = $('#path').val();
 
     $('#uploading').hide();
 
@@ -37,7 +36,7 @@ $(document).ready(function(){
             },
             function(data){
                 $('#prog').addClass("progress-bar-success");
-                $('.modal-body').html('<a class="thumbnail" style="width: 170px;height: 170px;" href="'+path+'/photo/'+data.id+'"><img src="'+path+'/img/thumbnail/'+data.thumbnail_name+'" width="160" hegiht="160" /></a>');
+                $('.modal-body').html('<a class="thumbnail" style="width: 160px; height: 110px;" href="'+url+'/photo/'+data.id+'"><img src="'+url+'/img/thumbnail/'+data.thumbnail_name+'" width="150" hegiht="100" /></a>');
             },
             function(prog, value){
                 $('#prog').width(value+'%');

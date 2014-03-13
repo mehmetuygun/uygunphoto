@@ -54,6 +54,8 @@
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="url" id="url" value="{{url('')}}"> 
+		<input type="hidden" name="public_path" id="public_path" value="{{public_path('')}}"> 
 		@if (isset($js))
 		@foreach ($js as $key)
 		{{HTML::script($key)}}

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ HTML::style('bootstrap/css/bootstrap.min.css') }}
     {{ HTML::style('css/style.css') }}
+    {{ HTML::style('css/font-awesome.min.css') }}
+    {{ HTML::style('css/bootstrap-social.css') }}
 </head>
 <body>
     <div id="wrap">

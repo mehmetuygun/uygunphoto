@@ -2,7 +2,7 @@ html,
 body {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
-    background-color: rgb(68, 68, 68);
+    background-color: #313131;
 }
 
 /* Wrapper for page content to push down footer */
@@ -18,8 +18,14 @@ body {
 /* Set the fixed height of the footer here */
 #footer {
     height: 60px;
-    background-color: #101010;
+    background-color: #222;
+    color: rgb(134, 134, 134);
 }
+
+#footer a {
+    color: white;
+}
+
 #content {
     padding-top: 80px;
     padding-bottom: 20px;
@@ -40,15 +46,12 @@ body {
     *display: inline;
     _height: 250px;
 }
-.panel-body {
-    background-color: white;
-}
 .thumbnail {
     width: 170px;
     height: 170px;
 }
 .photo-frame {
-    background-color: black;
+    background-color: #222;
     padding-top: 20px;
     border-radius: 4px;
 }
@@ -63,6 +66,12 @@ body {
     .thumbnail img {
         width: 80px;
         height: 80px;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    #photo, #comment_box {
+        height: 500px;
     }
 }
 
@@ -138,9 +147,10 @@ body {
 #content #photo {
     margin-right: 0;
     margin-left: 0;
-    background-color: #101010;
+    background-color: #222;
     -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.56);
     -moz-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.56);
+    max-height: 500px;
     box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.56);
 }
 
@@ -205,7 +215,6 @@ body {
     margin-top: 5px;
 }
 .panel-body {
-    background-color: #101010;
     border-radius: 0 0 4px 4px;
 }
 
@@ -223,4 +232,36 @@ body {
     border-top: 1px solid gray;
     padding-top: 10px;
     margin-top: 10px;
+}
+.panel-thumbnail {
+    padding: 0;
+}
+.panel-thumbnail .img-responsive {
+    border-radius: 4px 4px 0 0;
+}
+
+.panel-image-title {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(207, 207, 207);
+    margin-bottom: 10px;
+}
+.panel-image .panel-body {
+    background-color: #111111;
+}
+.banner-body {
+    background-color: #222;
+}
+.banner-title {
+    color: white;
+    font-weight: bold;
+}
+.banner > .panel-heading {
+    background-color: #222;
+}
+.banner > .panel-body {
+    padding-bottom: 0;
 }
