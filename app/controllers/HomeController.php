@@ -109,7 +109,7 @@ class HomeController extends BaseController {
 		$image_file = Input::file("inputFile");
 
 		$rules = array(
-			'inputFile' => 'image|max:10',
+			'inputFile' => 'image|max:5064',
 			'title' => 'alpha_dash|digits_between:6,64'
 		);
 

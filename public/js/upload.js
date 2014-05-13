@@ -16,8 +16,11 @@ $(document).ready(function(){
             var ftype = $('#inputFile')[0].files[0].type;
             var fname = $('#inputFile')[0].files[0].name;
             
-            if(ftype != 'image/png' || ftype != 'image/jpeg' || ftype != 'image/jpg' || fsize > 5242880) {
-                alert("The file must be image/png or image/jpeg and size of file must be under 5 mb!");
+            if (ftype != 'image/png' && ftype != 'image/jpeg' && ftype != 'image/jpg') {
+                alert("File type must be PNG or JPEG");
+            }
+            if (fsize > 5242880) {
+                alert("File size must be less than 5 MB!");
             }
         } else {
             alert("Please upgrade your browser, because your current browser lacks some new features we need!");
