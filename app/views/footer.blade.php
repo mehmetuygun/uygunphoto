@@ -15,35 +15,30 @@
 					<div class="modal-body" >
 						<div id="modal-body">
 							<form class="form-horizontal" role="form">
-								<div class="form-group">
+								<div class="form-group" id="form_photo">
+									<div class="col-sm-offset-3 col-sm-9">
+										<input type="file" id="inputFile" name="inputFile">
+										<span id="help-block-photo" class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group" id="form_title">
 									<label for="inputTitle" class="col-sm-3 control-label">{{ trans('form.title') }}</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" name="inputTitle" id="inputTitle" value="">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputFile" class="col-sm-3 control-label"></label>
-									<div class="col-sm-9">
-										<input type="file" id="inputFile" name="inputFile">
+										<span id="help-block-title" class="help-block"></span>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-offset-3 col-sm-9">
-
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-9">
-										<span id="upload_message"></span>
+										<div id="uploading">
+											<div class="progress progress-striped active" style="margin-bottom: 0">
+												<div class="progress-bar" id="prog" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="90"></div>
+											</div>
+											<p>{{ trans('message.uploading') }}</p>
+										</div>
 									</div>
 								</div>
 							</form>
-						</div>
-						<div id="uploading">
-							<div class="progress progress-striped active" style="margin-bottom: 0">
-								<div class="progress-bar" id="prog" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="90"></div>
-							</div>
-							<p>{{ trans('message.uploading') }}</p>
 						</div>
 					</div>
 					<div class="modal-footer">

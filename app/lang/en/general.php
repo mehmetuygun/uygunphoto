@@ -11,6 +11,6 @@ return array(
 	"register_info" => "It's free!",
 	"create_account" => "Create an Account",
 	"forget_password" => "Forgot Password",
-	"upload" => "Upload",
+	"upload" => "Upload Photo",
 	"latest" => "Latest"
 );

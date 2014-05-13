@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    resize_photo();
+    // resize_photo();
     // comment();
 
     $('#comment_save').on('click', function() {
@@ -8,7 +8,7 @@ $(document).ready(function() {
     });
 });
 
-$(window).resize(resize_photo);
+// $(window).resize(resize_photo);
 
 $(window).resize(comment);
 
@@ -36,17 +36,18 @@ function resize_photo() {
 }
 
 function comment_ajax() {
-    var url = $('#path').val();
+    var url = $('#url').val();
     $.post(url+"/ajax/comment", $('#comment_form').serialize(), function(data) {
         if(data.error) {
             alert(data.error);
+        } else {
+            do_action(data);
         }
-        do_action(data);
     });
 }
 
 function do_action(data) {
-    var url = $('#path').val();
+    var url = $('#url').val();
     var html = "";
     html += '<div class="media">';
     html +=  '<a class="pull-left" href="#">';

@@ -10,5 +10,6 @@ return array(
 	"description" => "Description",
 	"close" => "Close",
 	"status" => "Status",
-	"new" => "New"
+	"new" => "New",
+	"photo" => "Photo"
 );

@@ -95,16 +95,14 @@ class Image extends Eloquent {
 	}
 
 	public function getImages($limit) {
-		$image = DB::table($this->table)
-		->where('active', 1)
-		->orderBy('created_at', 'DESC')
-		->paginate($limit);
+		$image = Image::where('active', 1)
+			->orderBy('created_at', 'DESC')
+			->paginate($limit);
 		return $image;
 	}
 
 	public function getLastImages($limit) {
-		$image = DB::table($this->table)
-		->where('active', 1)
+		$image = Image::where('active', 1)
 		->orderBy('created_at', 'DESC')
 		->limit($limit)
 		->get();
@@ -118,7 +116,8 @@ class Image extends Eloquent {
 
 	public function comment()
 	{
-		return $this->hasMany('Comment');
+		return $this->hasMany('Comment')
+		->orderBy('created_at', 'desc');
 	}
 
 	public function banner()

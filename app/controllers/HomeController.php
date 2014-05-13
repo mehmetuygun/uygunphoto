@@ -107,33 +107,55 @@ class HomeController extends BaseController {
 	public function Upload()
 	{
 		$image_file = Input::file("inputFile");
-		$image = new Image;
 
-		if($image->upload($image_file)) {
-			$web_width = $image->_web_width;
-			$web_height = $image->_web_height;
-			$thumbnail_name = $image->_thumbnail_name;
-			$web_name = $image->_web_name;
-			$original_name = $image->_original_name;
-			$error = $image->error;
+		$rules = array(
+			'inputFile' => 'image|max:10',
+			'title' => 'alpha_dash|digits_between:6,64'
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if($validator->fails()) {
+
+			$messages = $validator->messages();
+
+			$json = array();
+			$json['error'] = true;
+			$json['messages'] = array(
+				Lang::get('form.title') => $messages->first('title'),
+				Lang::get('form.photo') => $messages->first('inputFile')
+			);
 			
-			$image = new Image;
-			$image->title = Input::get('title');
-			$image->user_id = Auth::user()->id;
-			$image->active = 1;
-			$image->web_string = 'width="'.$web_width.'" height="'.$web_height.'"';
-			$image->web_width = $web_width;
-			$image->web_height = $web_height;
-			$image->original_name = $original_name;
-			$image->thumbnail_name = $thumbnail_name;
-			$image->web_name = $web_name;
+			return Response::json($json);
 
-			if($image->save()) {
-				echo json_encode(array('title'=> Input::get('title'), 'thumbnail_name'=> $thumbnail_name, 'id'=> $image->id));
-			}
 		} else {
-			echo json_encode(array('error' => $error));
-		}
+			$image = new Image;
 
+			if($image->upload($image_file)) {
+				$web_width = $image->_web_width;
+				$web_height = $image->_web_height;
+				$thumbnail_name = $image->_thumbnail_name;
+				$web_name = $image->_web_name;
+				$original_name = $image->_original_name;
+				$error = $image->error;
+				
+				$image = new Image;
+				$image->title = Input::get('title');
+				$image->user_id = Auth::user()->id;
+				$image->active = 1;
+				$image->web_string = 'width="'.$web_width.'" height="'.$web_height.'"';
+				$image->web_width = $web_width;
+				$image->web_height = $web_height;
+				$image->original_name = $original_name;
+				$image->thumbnail_name = $thumbnail_name;
+				$image->web_name = $web_name;
+
+				if($image->save()) {
+					return Response::json(array('title'=> Input::get('title'), 'thumbnail_name'=> $thumbnail_name, 'id'=> $image->id));
+				}
+			} else {
+				return Response::json(array('error' => $error));
+			}
+		}
 	}
 }

@@ -13,8 +13,8 @@
 						</div>
 						<div class="panel-body panel-thumbnail-body">
 							<div class="panel-image-title lead">{{ $image->title }}</div>
-							<div><a href="{{url('profile/')}}"><i class="glyphicon glyphicon-user"></i> Mehmet Uygun</a></div>
-							<h5><span class="label label-primary"><i class="glyphicon glyphicon-comment"></i> {{Image::find($image->id)->comment()->count()}}</span> </h5>
+							<div><a href="{{url('profile/'.$image->user->id)}}"><i class="glyphicon glyphicon-user"></i> {{$image->user->first_name.' '.$image->user->last_name}}</a></div>
+							<h5><span class="label label-warning"><i class="glyphicon glyphicon-comment"></i> {{Image::find($image->id)->comment()->count()}}</span> </h5>
 								<a class="btn btn-social-icon btn-twitter btn-xs" target="_blank" title="On Facebook" href="http://www.facebook.com/sharer.php?u={{url('/photo/'.$image->id)}}">
 									<i class="fa fa-facebook"></i>
 								</a>

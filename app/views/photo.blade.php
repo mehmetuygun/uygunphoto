@@ -1,11 +1,11 @@
 @include('header')
 <div class="row" id="photo">
-    <div class="col-xs-12 col-sm-8 col-md-8" id="img_box">
+    <div class="col-xs-12 col-sm-8 col-md-8 banner-body" id="img_box">
         <img src="{{url('/img/web/'.$image->web_name)}}" class="web_image"/>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4" id="comment_box">
+    <div class="col-xs-12 col-sm-4 col-md-4 banner-body" id="comment_box">
     <div class="comment_header">
-    <h4><span class="glyphicon glyphicon-paperclip white"></span> {{$image->title}}</h4>
+    <h4 class="panel-image-title"><span class="glyphicon glyphicon-paperclip white"></span> {{$image->title}}</h4>
         <div class="media">
             <a class="pull-left" href="#">
                 <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
@@ -25,83 +25,19 @@
         
     </div>
         <div class="comment_frame" id="comment_frame_id">
+            @foreach ($image->comment as $comment)
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
                 </a>
                 <div class="media-body">
                     <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
+                        <a href="#">{{ $comment->user->first_name.' '.$comment->user->last_name }}</a>
                     </h5>
-                    <p>TEST</p>
+                    <p>{{ $comment->description }}</p>
                 </div>
             </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
-                    </h5>
-                    <p>TEST</p>
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
-                    </h5>
-                    <p>TEST</p>
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
-                    </h5>
-                    <p>TEST</p>
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
-                    </h5>
-                    <p>TEST</p>
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
-                    </h5>
-                    <p>TEST</p>
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="{{url('img/avatar/user-64.png')}}" width="32" height="32" alt="Image">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <a href="#">Mehmet Uygun</a>
-                    </h5>
-                    <p>TEST</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     </div>
