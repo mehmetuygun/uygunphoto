@@ -1,25 +1,21 @@
+var modal_body;
 $(document).ready(function(){
-
-    var error_type = $("#error_type").val();
-    var valid = true;
+    // Keep the default modal body in a variable
+    // to revert it back when 'New' is clicked
+    modal_body = $('#modal-body').html();
     var url = $("#url").val();
     var upload_link = url+'/upload';
-    var error_title_length;
-    var modal_body = $('#modal-body').html();
-    var new_upload = $('#new_upload').val();
 
     $('#uploading').hide();
 
     $("#inputFile").change(function() {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
-            var fsize = $('#inputFile')[0].files[0].size;
-            var ftype = $('#inputFile')[0].files[0].type;
-            var fname = $('#inputFile')[0].files[0].name;
+            var file = $('#inputFile')[0].files[0];
             
-            if (ftype != 'image/png' && ftype != 'image/jpeg' && ftype != 'image/jpg') {
+            if (['image/png', 'image/jpeg', 'image/jpg'].indexOf(file.type) === -1) {
                 alert("File type must be PNG or JPEG");
             }
-            if (fsize > 5242880) {
+            if (file.size > 5242880) {
                 alert("File size must be less than 5 MB!");
             }
         } else {
@@ -32,21 +28,17 @@ $(document).ready(function(){
 
         $('#uploading').show();
 
-        $('#inputFile').upload(upload_link,
-        {
-            title: title
-        },
-        function(data){
+        $('#inputFile').upload(upload_link, {title: title}, function(data){
             if(data.error) {
                 $('#uploading').hide();
-                if(data.messages.Title != "") {
+                if(data.messages.Title) {
                     $('#form_title').addClass('has-error');
                     $('#help-block-title').html(data.messages.Title);
                 } else {
                     $('#form_title').addClass('has-success');
                 }
 
-                if(data.messages.Photo != "") {
+                if(data.messages.Photo) {
                     $('#form_photo').addClass('has-error');
                     $('#help-block-photo').html(data.messages.Photo);
                 } else {
@@ -57,14 +49,13 @@ $(document).ready(function(){
                 html += '<img src="'+url+'/img/thumbnail/'+data.thumbnail_name+'" width="90" height="30"></a>';
                 $('.modal-body').html(html);
             }
-        },
-        function(prog, value){
+        }, function(prog, value){
             $('#prog').width(value+'%');
         });
     });
 
     $('#new_upload').on('click', function(){
+        $('#modal-body').html(modal_body);
         $('#uploading').hide();
-        $('.modal-body').html(modal_body);
     });
 });
