@@ -8,23 +8,32 @@ $(document).ready(function(){
 
     $('#uploading').hide();
 
-    $("#inputFile").change(function() {
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            var file = $('#inputFile')[0].files[0];
-            
-            if (['image/png', 'image/jpeg', 'image/jpg'].indexOf(file.type) === -1) {
-                alert("File type must be PNG or JPEG");
-            }
-            if (file.size > 5242880) {
-                alert("File size must be less than 5 MB!");
-            }
-        } else {
+    var validateFile = function () {
+        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
             alert("Please upgrade your browser, because your current browser lacks some new features we need!");
+            return;
         }
-    });
+
+        var file = this.files[0];
+        if (['image/png', 'image/jpeg', 'image/jpg'].indexOf(file.type) === -1) {
+            alert("File type must be PNG or JPEG");
+            return;
+        }
+        if (file.size > 5242880) {
+            alert("File size must be less than 5 MB!");
+            return;
+        }
+    }
+
+    $("#inputFile").change(validateFile);
 
     $('#upload').on('click', function(){
         var title = $('#inputTitle').val();
+
+        if (!$('#inputFile')[0].files.length) {
+            alert('Please select a file to upload.');
+            return;
+        }
 
         $('#uploading').show();
 
@@ -57,5 +66,6 @@ $(document).ready(function(){
     $('#new_upload').on('click', function(){
         $('#modal-body').html(modal_body);
         $('#uploading').hide();
+        $("#inputFile").change(validateFile);
     });
 });
