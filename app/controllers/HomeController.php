@@ -109,7 +109,7 @@ class HomeController extends BaseController {
 		$image_file = Input::file("inputFile");
 
 		$rules = array(
-			'inputFile' => 'image|max:5064',
+			'inputFile' => 'image|max:5064|mimes:jpeg,png',
 			'title' => 'alpha_dash|digits_between:6,64'
 		);
 
@@ -128,10 +128,18 @@ class HomeController extends BaseController {
 			return Response::json($json);
 		}
 
-		$image = new Image;
+		if (!Input::hasFile('inputFile')) {
+			return Response::json(array());
+		}
 
+		$image = new Image;
 		if (!$image->upload($image_file)) {
-			return Response::json(array('error' => $image->error));
+			return Response::json(array(
+				'error' => true,
+				'messages' => array(
+					Lang::get('form.photo') => $image->error
+				)
+			));
 		}
 
 		$web_width = $image->_web_width;

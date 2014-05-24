@@ -17,14 +17,14 @@ class Image extends Eloquent {
 
 	public function upload($image_file)
 	{
-		if($this->isImage($image_file) 
-			&& $this->createThubmnail($image_file, $thumbnailName = uniqid(true)) 
+		if ($this->createThubmnail($image_file, $thumbnailName = uniqid(true)) 
 			&& $this->webImage($image_file, $webImageName = uniqid(true)) 
-			&& $this->original($image_file, $originalName = uniqid(true))) {
-				return true;
-		} else {
-			return false;
+			&& $this->original($image_file, $originalName = uniqid(true))
+		) {
+			return true;
 		}
+
+		return false;
 	}
 
 	public function original($file, $fileName)
@@ -33,15 +33,7 @@ class Image extends Eloquent {
 			$this->_original_name = $fileName.'.jpg';
 			return true;
 		}
-		$this->error = lang::get('error.wrong');
-		return false;
-	}
-
-	public function isImage($file)
-	{
-		if($file->getMimeType() == 'image/jpeg')
-			return true;
-		$this->error = lang::get('error.not_image');
+		$this->error = Lang::get('error.wrong');
 		return false;
 	}
 
@@ -54,7 +46,7 @@ class Image extends Eloquent {
 		if($image->grab(450, 300)->save(base_path().'/public/img/thumbnail/'.$fileName.'.jpg'))
 			return true;
 
-		$this->error = lang::get('error.wrong');
+		$this->error = Lang::get('error.wrong');
 		return false;
 	}
 
@@ -89,7 +81,7 @@ class Image extends Eloquent {
 			$this->_web_height = $img_height;
 			return true;
 		} else {
-			$this->error = lang::get('error.wrong');
+			$this->error = Lang::get('error.wrong');
 			return false;
 		}
 	}
