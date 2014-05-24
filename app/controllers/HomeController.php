@@ -116,7 +116,6 @@ class HomeController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()) {
-
 			$messages = $validator->messages();
 
 			$json = array();
@@ -127,35 +126,37 @@ class HomeController extends BaseController {
 			);
 			
 			return Response::json($json);
+		}
 
-		} else {
-			$image = new Image;
+		$image = new Image;
 
-			if($image->upload($image_file)) {
-				$web_width = $image->_web_width;
-				$web_height = $image->_web_height;
-				$thumbnail_name = $image->_thumbnail_name;
-				$web_name = $image->_web_name;
-				$original_name = $image->_original_name;
-				$error = $image->error;
-				
-				$image = new Image;
-				$image->title = Input::get('title');
-				$image->user_id = Auth::user()->id;
-				$image->active = 1;
-				$image->web_string = 'width="'.$web_width.'" height="'.$web_height.'"';
-				$image->web_width = $web_width;
-				$image->web_height = $web_height;
-				$image->original_name = $original_name;
-				$image->thumbnail_name = $thumbnail_name;
-				$image->web_name = $web_name;
+		if (!$image->upload($image_file)) {
+			return Response::json(array('error' => $image->error));
+		}
 
-				if($image->save()) {
-					return Response::json(array('title'=> Input::get('title'), 'thumbnail_name'=> $thumbnail_name, 'id'=> $image->id));
-				}
-			} else {
-				return Response::json(array('error' => $error));
-			}
+		$web_width = $image->_web_width;
+		$web_height = $image->_web_height;
+		$thumbnail_name = $image->_thumbnail_name;
+		$web_name = $image->_web_name;
+		$original_name = $image->_original_name;
+		
+		$image = new Image;
+		$image->title = Input::get('title');
+		$image->user_id = Auth::user()->id;
+		$image->active = 1;
+		$image->web_string = 'width="'.$web_width.'" height="'.$web_height.'"';
+		$image->web_width = $web_width;
+		$image->web_height = $web_height;
+		$image->original_name = $original_name;
+		$image->thumbnail_name = $thumbnail_name;
+		$image->web_name = $web_name;
+
+		if ($image->save()) {
+			return Response::json(array(
+				'title'=> Input::get('title'),
+				'thumbnail_name'=> $thumbnail_name,
+				'id'=> $image->id
+			));
 		}
 	}
 }
