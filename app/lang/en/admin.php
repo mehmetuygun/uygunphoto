@@ -37,7 +37,6 @@ return array(
 	"users" => "Users",
 	"photos" => "Photos",
 	"system" => "System",
-	"titel" => "Title",
 	"manage_photos" => "Manage Photos",
 	"photo_id" => "Photo ID",
 	"edit_photo" => "Edit Photo",
@@ -48,7 +47,6 @@ return array(
 	"manage_users" => "Manage Users",
 	"first_name" => "First Name",
 	"last_name" => "Last Name",
-	"email" => "Email",
 	"user_id" => "User ID",
 	"edit_user" => "Edit User",
 	"setting" => "Setting",
@@ -62,5 +60,10 @@ return array(
 	"help" => "Help",
 	"password_validation_error" => "The password did not match.",
 	"component" => "Component",
-	"banner" => "Banner"
+	"panel" => "Panel",
+	"manage_panels" => "Manage Panels",
+	"sort" => "Sort",
+	"number_of_photos" => "Number of Photos",
+	"no_record_found" => "No Record Found",
+	"add" => "Add",
 );
