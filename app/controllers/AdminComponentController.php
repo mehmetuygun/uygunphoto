@@ -11,6 +11,15 @@ class AdminComponentController extends BaseController
 		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js", "js/admin_panel.js");
 
 		return View::make('admin/component_panel')->with($data);
+	}	
+
+	public function panelAdd()
+	{	
+
+
+		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js");
+
+		return View::make('admin/component_panel_add')->with($data);
 	}
 
 	public function active()

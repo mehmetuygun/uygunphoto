@@ -60,6 +60,8 @@ Route::any('/admin/user/profile',  array('before' => 'admin', 'uses' => 'AdminUs
 
 Route::any('/admin/user/password',  array('before' => 'admin', 'uses' => 'AdminUserController@Password'));
 
+Route::any('/admin/component/panel/add',  array('before' => 'admin', 'uses' => 'AdminComponentController@panelAdd'));
+
 Route::any('/admin/component/panel',  array('before' => 'admin', 'uses' => 'AdminComponentController@panel'));
 
 Route::any('/admin/system/configuration',  array('before' => 'admin', 'uses' => 'AdminSystemController@Configuration'));
