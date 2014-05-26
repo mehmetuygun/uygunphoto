@@ -60,7 +60,7 @@ Route::any('/admin/user/profile',  array('before' => 'admin', 'uses' => 'AdminUs
 
 Route::any('/admin/user/password',  array('before' => 'admin', 'uses' => 'AdminUserController@Password'));
 
-Route::any('/admin/component/banner',  array('before' => 'admin', 'uses' => 'AdminComponentController@Banner'));
+Route::any('/admin/component/panel',  array('before' => 'admin', 'uses' => 'AdminComponentController@panel'));
 
 Route::any('/admin/system/configuration',  array('before' => 'admin', 'uses' => 'AdminSystemController@Configuration'));
 
@@ -70,7 +70,7 @@ Route::any('/admin/comment/ajax/active',  array('before' => 'admin', 'uses' => '
 
 Route::any('/admin/photo/ajax/active',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Active'));
 
-Route::any('/admin/component/banner/ajax/active',  array('before' => 'admin', 'uses' => 'AdminComponentController@Active'));
+Route::any('/admin/component/panel/ajax/active',  array('before' => 'admin', 'uses' => 'AdminComponentController@Active'));
 
 Route::any('/admin/comment/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminCommentController@Delete'));
 
@@ -78,7 +78,7 @@ Route::any('/admin/user/ajax/delete',  array('before' => 'admin', 'uses' => 'Adm
 
 Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
 
-Route::any('/admin/component/banner/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminComponentController@Delete'));
+Route::any('/admin/component/panel/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminComponentController@Delete'));
 
 Route::get('/email', function() 
 {

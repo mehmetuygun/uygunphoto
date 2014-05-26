@@ -29,7 +29,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-wrench"></i> {{ trans('admin.component') }}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{url('admin/component/banner')}}">{{ trans('admin.banner') }}</a></li>
+                                <li><a href="{{url('admin/component/panel')}}">{{ trans('admin.panel') }}</a></li>
                             </ul>
                         </li>                       
                         <li class="dropdown">

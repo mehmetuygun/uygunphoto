@@ -1,28 +1,28 @@
 $(function(){
 
 	var url = $('#url').val();
-	var banner_id;
-	var banner_row;
+	var panel_id;
+	var panel_row;
 
 	$('.btn-radio').on('click', function() {
 		var active = $(this).find('input[type=radio]').val();
-		var banner_id = $(this).parent().data('commentid');
-		RunBannerAjaxActive(banner_id, active);
+		var panel_id = $(this).parent().data('commentid');
+		RunpanelAjaxActive(panel_id, active);
 	});
 
 	$('.btn-delete').on('click', function() {
-		banner_id = $(this).data('commentid');
-		banner_row = $(this).closest('tr');
+		panel_id = $(this).data('commentid');
+		panel_row = $(this).closest('tr');
 	});
 
 	$('#btn-delete').on('click', function() {
 		$('#AlertModal').modal('hide')
-		RunBannerAjaxDelete(banner_id, banner_row);
+		RunpanelAjaxDelete(panel_id, panel_row);
 	})
 
-	function RunBannerAjaxActive(banner_id, active)
+	function RunpanelAjaxActive(panel_id, active)
 	{
-		$.post(url+'/admin/component/banner/ajax/active', {banner_id: banner_id, active: active}, function(json) {
+		$.post(url+'/admin/component/panel/ajax/active', {panel_id: panel_id, active: active}, function(json) {
 			if(json.e == 1) {
 				showAlert('alert-success', 'Message:', json.message);
 			} else {
@@ -31,12 +31,12 @@ $(function(){
 		});
 	}
 
-	function RunBannerAjaxDelete(banner_id, banner_row)
+	function RunpanelAjaxDelete(panel_id, panel_row)
 	{
-		$.post(url+'/admin/component/banner/ajax/delete', {banner_id: banner_id}, function(json) {
+		$.post(url+'/admin/component/panel/ajax/delete', {panel_id: panel_id}, function(json) {
 			if(json.e == 1) {
 				// showAlert('alert-success', 'Message:', json.message);
-				banner_row.fadeOut( 1000 );
+				panel_row.fadeOut( 1000 );
 			} else {
 				showAlert('alert-danger', 'Error:', json.message);
 			}

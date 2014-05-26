@@ -1,8 +1,8 @@
 <?php
 
-class Banner extends Eloquent 
+class Panel extends Eloquent 
 {
-	protected $table = 'banner';
+	protected $table = 'panel';
 
 	public function images()
 	{
