@@ -80,6 +80,8 @@ Route::any('/admin/user/ajax/delete',  array('before' => 'admin', 'uses' => 'Adm
 
 Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
 
+Route::any('/admin/photo/ajax/getphotos',  array('before' => 'admin', 'uses' => 'AdminPhotoController@getPhotos'));
+
 Route::any('/admin/component/panel/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminComponentController@Delete'));
 
 Route::get('/email', function() 
@@ -95,10 +97,10 @@ Route::get('/email', function()
 	});
 });
 
-// Route::get('/test', function() {
-// 	$number = ;
-// 	echo round($number, 0);
-// });
+Route::get('/test', function() {
+
+	
+});
 
 App::missing(function($exception) {
 	return '404';

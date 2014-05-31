@@ -109,4 +109,33 @@ class AdminPhotoController extends BaseController
 
 		return Response::json($json);
 	}
+
+	public function getPhotos()
+	{
+		$json = array();
+
+		if(Input::has('id')) {
+			$ids = explode(',', Input::get('id'));
+
+			foreach ($ids as $index => $id) {
+				$ids[$index] = intval($id);
+				if ($ids[$index] < 1) {
+					unset($ids[$index]);
+				}
+			}
+			$photos = Image::select('id', 'title', 'thumbnail_name')->whereIn('id', $ids);
+		} else {
+			$photos = Image::select('id', 'title', 'thumbnail_name')
+				->limit(10);
+			if (Input::has('q')) {
+				$photos = $photos->where('title', 'LIKE', '%'.Input::get('q').'%');
+			}
+		}
+
+		if (isset($photos)) {
+			$json = $photos->get()->toArray();
+		}
+
+		return Response::json(array('photos' => $json));
+	}
 }

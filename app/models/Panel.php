@@ -8,4 +8,13 @@ class Panel extends Eloquent
 	{
 		return $this->hasMany('Image');
 	}
+
+	public function types()
+	{
+		return array(
+			1 => 'Custom',
+			2 => 'Most Commented',
+			3 => 'Latest Added',
+			);
+	}
 }

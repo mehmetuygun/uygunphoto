@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ HTML::style('bootstrap/css/bootstrap.min.css') }}
     {{ HTML::style('css/admin.css') }}
+    @if (isset($css))
+        @foreach ($css as $key)
+            {{HTML::style($key)}}
+        @endforeach
+    @endif
 </head>
 <body>
     <div id="wrap">
@@ -64,9 +69,10 @@
         <div class="alert" style="display: none">
             <strong class="alert-title">Message:</strong> <span class="alert-body">Your changes has been updated.</span>
         </div>
-        @if(isset($is_message) && $is_message)
-            <div class="alert {{$alert_type}}">
+        @if(!empty($alert))
+            <div class="alert {{ $alert_type }}">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>{{ $alert_name }}:</strong> {{ $alert_message }}
+                {{ $alert_message }}
             </div>
         @endif
+        

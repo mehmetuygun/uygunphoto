@@ -4,7 +4,7 @@
 		<h3 class="panel-title">{{ trans('admin.manage_panels') }}</h3>
 	</div>
 	<div class="panel-body admin-bottom">
-		<a href="{{url('admin/component/panel/add')}}" style="margin-bottom: 15px" class="btn btn-sm btn-primary pull-right">{{ trans('admin.add') }}</a>
+		<a href="{{url('admin/component/panel/add')}}" style="margin-bottom: 15px" class="btn btn-sm btn-primary pull-left">{{ trans('admin.add_new_panel') }}</a>
 
 		<div class="table-responsive">
 		  	<table class="table table-bordered">
