@@ -44,7 +44,7 @@
 				$('.alert .alert-title').html(message);
 				$('.alert .alert-body').html(alert_body);
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-				setTimeout( "$('.alert').fadeIn('slow');", 1000 );
+				$('.alert').show();
 				setTimeout( "$('.alert').fadeOut('slow');",3000 );
 			}
 		</script>
