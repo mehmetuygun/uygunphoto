@@ -62,21 +62,24 @@ class AdminComponentController extends BaseController
 			} else {
 				$panel = new Panel;
 				$panel->title = Input::get('title');
-				$panel->sort = 1;
+				$panel->sort = 0;
 				$panel->type = Input::get('type');
 				$panel->save();
-				if($panel->save() && Input::get('type') == 1) {
+				if($panel->save() && Input::get('type')) {
 					$count = 1;
-					$PanelImage = new PanelImage;
 					$values = Input::get('image');
 					$values = explode(',', $values);
 					foreach($values as $value) {
+						$PanelImage = new PanelImage;
 						$PanelImage->panel_id = $panel->id;
 						$PanelImage->image_id = $value;
 						$PanelImage->sort = $count;
 						$count++;
+						if($PanelImage->save()) {
+							$PanelImageSave = true;
+						}
 					}
-					if($PanelImage->save()) {
+					if($PanelImageSave) {
 						Session::flash('alert', $success_message);
 						return Redirect::action('AdminComponentController@panel', array(), 303);
 					}

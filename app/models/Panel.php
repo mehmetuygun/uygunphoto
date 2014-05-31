@@ -6,7 +6,7 @@ class Panel extends Eloquent
 
 	public function images()
 	{
-		return $this->hasMany('Image');
+		return $this->hasMany('PanelImage');
 	}
 
 	public function types()
