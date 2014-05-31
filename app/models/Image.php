@@ -112,6 +112,11 @@ class Image extends Eloquent {
 		->orderBy('created_at', 'desc');
 	}
 
+	public function panelimages()
+	{
+		return $this->hasMany('PanelImage');
+	}
+
 	public function banner()
 	{
 		return $this->belongsTo('banner');

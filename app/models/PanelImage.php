@@ -8,4 +8,9 @@ class PanelImage extends Eloquent
 	{
 		return $this->belongsTo('panel');
 	}
+
+	public function image()
+	{
+		return $this->belongsTo('image');
+	}
 }

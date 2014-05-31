@@ -64,7 +64,6 @@ class AdminComponentController extends BaseController
 				$panel->title = Input::get('title');
 				$panel->sort = 0;
 				$panel->type = Input::get('type');
-				$panel->save();
 				if($panel->save() && Input::get('type')) {
 					$count = 1;
 					$values = Input::get('image');
