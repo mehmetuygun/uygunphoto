@@ -6,12 +6,12 @@ $(function(){
 
 	$('.btn-radio').on('click', function() {
 		var active = $(this).find('input[type=radio]').val();
-		var panel_id = $(this).parent().data('commentid');
+		var panel_id = $(this).parent().data('panelid');
 		RunpanelAjaxActive(panel_id, active);
 	});
 
 	$('.btn-delete').on('click', function() {
-		panel_id = $(this).data('commentid');
+		panel_id = $(this).data('panelid');
 		panel_row = $(this).closest('tr');
 	});
 

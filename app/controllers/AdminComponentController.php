@@ -90,6 +90,91 @@ class AdminComponentController extends BaseController
 		return View::make('admin/component_panel_add')->with($data);
 	}
 
+	public function panelEdit($id)
+	{
+
+		$data['js'] = array(
+			"js/jquery-1.11.0.min.js", 
+			"bootstrap/js/bootstrap.min.js", 
+			"js/admin_panel.js", 
+			"js/select2.min.js",
+			"js/jquery-ui-1.10.4.custom.min.js"
+		);
+
+		$data['css'] = array('css/select2.css', 'css/ui-lightness/jquery-ui-1.10.4.custom.min.css');
+		
+
+		if(Request::isMethod('post')) {
+
+			$rules = array(
+				'title' => 'required|alpha_dash|digits_between:2,64',
+			);
+
+
+			$label = array(
+				'title' => Lang::get('title'),
+			);
+
+			if(Input::get('type')) {
+				$rules['image'] = 'required';
+				$label['image'] = Lang::get('admin.select_photos');
+			}
+
+			$validator = Validator::make(Input::all(), $rules, array(), $label);
+
+			if ($validator->fails()) {
+				$data['messages'] = $validator->messages();
+				Input::flash();
+			} else {
+				$panel = Panel::find($id);
+				$panel->title = Input::get('title');
+				$panel->sort = 0;
+				$panel->type = Input::get('type');
+				if($panel->save() && Input::get('type')) {
+					if(Input::get('type') == 1) {
+						$count = 1;
+						$values = Input::get('image');
+						$values = explode(',', $values);
+						$PanelImageOld = PanelImage::Where('panel_id', '=', $panel->id);
+						$PanelImageOld->delete();
+						foreach($values as $value) {
+							$PanelImage = new PanelImage;
+							$PanelImage->panel_id = $panel->id;
+							$PanelImage->image_id = $value;
+							$PanelImage->sort = $count;
+							$count++;
+							if($PanelImage->save()) {
+								$PanelImageSave = true;
+							}
+						}
+					}
+
+					if(Input::get('type') != 1) {
+						$PanelImageOld = PanelImage::Where('panel_id', '=', $panel->id);
+						$PanelImageOld->delete();
+						$PanelImageSave = true;
+					}
+
+					if($PanelImageSave) {
+						$data['alert'] = 1;
+						$data['alert_message'] = Lang::get('admin.alert_updated_success');
+						$data['alert_type'] = 'alert-success';
+
+					}
+				} // end of panel save
+			} // end of else 
+		} // end of post
+
+		$panel = Panel::find($id);
+
+		$p = new Panel;
+
+		$data['panel'] = $panel;
+		$data['types'] = $panel->types();
+		$data['images'] = $p->getImagesString($id);
+		return View::make('admin/component_panel_edit')->with($data);
+	}
+
 	public function active()
 	{
 		$json = array();

@@ -62,6 +62,8 @@ Route::any('/admin/user/password',  array('before' => 'admin', 'uses' => 'AdminU
 
 Route::any('/admin/component/panel/add',  array('before' => 'admin', 'uses' => 'AdminComponentController@panelAdd'));
 
+Route::any('/admin/component/panel/edit/{id}',  array('before' => 'admin', 'uses' => 'AdminComponentController@panelEdit'));
+
 Route::any('/admin/component/panel',  array('before' => 'admin', 'uses' => 'AdminComponentController@panel'));
 
 Route::any('/admin/system/configuration',  array('before' => 'admin', 'uses' => 'AdminSystemController@Configuration'));

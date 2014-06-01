@@ -15,6 +15,7 @@
 	  				<th>{{ trans('admin.active') }}</th>
 	  				<th>{{ trans('admin.updated_at') }}</th>
 	  				<th>{{ trans('admin.created_at') }}</th>
+	  				<th>{{ trans('admin.action') }}</th>
 	  			</thead>
 	  			<tbody>
 				@if ($panels->count() < 1)
@@ -37,6 +38,10 @@
 							</td>
 							<td>{{ $panel->updated_at }}</td>
 							<td>{{ $panel->created_at }}</td>
+							<td>
+		  						<a href="{{ url('admin/component/panel/edit/'.$panel->id) }}" class="btn btn-primary btn-sm">{{ trans('admin.edit') }}</a>
+		  						<button class="btn btn-danger btn-sm btn-delete" data-panelid="{{ $panel->id }}" data-toggle="modal" data-target="#AlertModal">Delete</button>
+	  						</td>
 						</tr>
 					@endforeach
 				@endif
