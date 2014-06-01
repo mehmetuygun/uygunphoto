@@ -10,8 +10,6 @@ class AdminComponentController extends BaseController
 
 		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js", "js/admin_panel.js");
 
-		// echo Session::get('alert_message.alert_message');exit;
-
 		$data['alert'] = Session::get('alert.alert');
 		$data['alert_message'] = Session::get('alert.alert_message'); 
 		$data['alert_type'] = Session::get('alert.alert_type'); 
@@ -97,7 +95,7 @@ class AdminComponentController extends BaseController
 		$json = array();
 		$json['e'] = 0;
 
-		$panel = panel::find(Input::get('panel_id'));
+		$panel = Panel::find(Input::get('panel_id'));
 
 		if(Input::get('active') == 1) {
 			$panel->active = 1;
@@ -117,5 +115,38 @@ class AdminComponentController extends BaseController
 		}
 
 		return Response::json($json);
+	}
+
+	/**
+	 * Re-order panels using the position and panel ID
+	 * When no panel ID given it reserves the given position
+	 *
+	 * @param  integer $position New position of the panel
+	 * @param  integer $panelId  Panel ID
+	 *
+	 * @return bool              Success
+	 */
+	private function reorderPanels($position, $panelId = null)
+	{
+		// If no panelId given, reserve the given position
+		if (!$panelId) {
+			return (bool) Panel::where('sort', '>=', $position)
+				->increment('sort');
+		}
+
+		$panel = Panel::find($panelId);
+		$prevPos = $panel->sort;
+		if ($position < $prevPos) {
+			Panel::where('sort', '>=', $position)
+				->where('sort', '<', $prevPos)
+				->increment('sort');
+		} elseif ($position > $prevPos) {
+			Panel::where('sort', '<=', $position)
+				->where('sort', '>', $prevPos)
+				->decrement('sort');
+		}
+
+		$panel->sort = $position;
+		return $panel->save();
 	}
 }
