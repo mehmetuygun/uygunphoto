@@ -10,7 +10,7 @@
 		  	<table class="table table-bordered">
 	  			<thead>
 	  				<th>{{ trans('admin.title') }}</th>
-	  				<th>{{ trans('admin.sort') }}</th>
+	  				<th>{{ trans('admin.position') }}</th>
 	  				<th>{{ trans('admin.number_of_photos') }}</th>
 	  				<th>{{ trans('admin.active') }}</th>
 	  				<th>{{ trans('admin.updated_at') }}</th>
@@ -24,7 +24,7 @@
 					@foreach ($panels as $panel)
 						<tr>
 							<td>{{ $panel->title }}</td>
-							<td>{{ $panel->sort }}</td>
+							<td>{{ $panel->position }}</td>
 							<td>{{ $panel->images->count() }}</td>
 							<td>
 		  						<div class="btn-group" data-toggle="buttons" data-commentid="{{ $panel->id }}">

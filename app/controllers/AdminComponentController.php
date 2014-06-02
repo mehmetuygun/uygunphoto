@@ -60,7 +60,7 @@ class AdminComponentController extends BaseController
 			} else {
 				$panel = new Panel;
 				$panel->title = Input::get('title');
-				$panel->sort = 0;
+				$panel->position = 0;
 				$panel->type = Input::get('type');
 				if($panel->save() && Input::get('type')) {
 					$count = 1;
@@ -70,7 +70,7 @@ class AdminComponentController extends BaseController
 						$PanelImage = new PanelImage;
 						$PanelImage->panel_id = $panel->id;
 						$PanelImage->image_id = $value;
-						$PanelImage->sort = $count;
+						$PanelImage->position = $count;
 						$count++;
 						if($PanelImage->save()) {
 							$PanelImageSave = true;
@@ -128,7 +128,7 @@ class AdminComponentController extends BaseController
 			} else {
 				$panel = Panel::find($id);
 				$panel->title = Input::get('title');
-				$panel->sort = 0;
+				$panel->position = 0;
 				$panel->type = Input::get('type');
 				if($panel->save() && Input::get('type')) {
 					if(Input::get('type') == 1) {
@@ -141,7 +141,7 @@ class AdminComponentController extends BaseController
 							$PanelImage = new PanelImage;
 							$PanelImage->panel_id = $panel->id;
 							$PanelImage->image_id = $value;
-							$PanelImage->sort = $count;
+							$PanelImage->position = $count;
 							$count++;
 							if($PanelImage->save()) {
 								$PanelImageSave = true;
@@ -232,23 +232,23 @@ class AdminComponentController extends BaseController
 	{
 		// If no panelId given, reserve the given position
 		if (!$panelId) {
-			return (bool) Panel::where('sort', '>=', $position)
-				->increment('sort');
+			return (bool) Panel::where('position', '>=', $position)
+				->increment('position');
 		}
 
 		$panel = Panel::find($panelId);
-		$prevPos = $panel->sort;
+		$prevPos = $panel->position;
 		if ($position < $prevPos) {
-			Panel::where('sort', '>=', $position)
-				->where('sort', '<', $prevPos)
-				->increment('sort');
+			Panel::where('position', '>=', $position)
+				->where('position', '<', $prevPos)
+				->increment('position');
 		} elseif ($position > $prevPos) {
-			Panel::where('sort', '<=', $position)
-				->where('sort', '>', $prevPos)
-				->decrement('sort');
+			Panel::where('position', '<=', $position)
+				->where('position', '>', $prevPos)
+				->decrement('position');
 		}
 
-		$panel->sort = $position;
+		$panel->position = $position;
 		return $panel->save();
 	}
 }

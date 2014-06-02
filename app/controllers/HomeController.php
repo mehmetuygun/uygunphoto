@@ -26,7 +26,7 @@ class HomeController extends BaseController {
 
 		$data['images'] = $image->getLastImages(8);
 
-		$data['panels'] = Panel::orderBy('sort', 'asc')->get();
+		$data['panels'] = Panel::orderBy('position', 'asc')->get();
 
 		return View::make('view')->with($data);
 	}
