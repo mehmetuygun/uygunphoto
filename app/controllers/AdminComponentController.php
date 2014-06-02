@@ -202,6 +202,23 @@ class AdminComponentController extends BaseController
 		return Response::json($json);
 	}
 
+	public function delete()
+	{
+		$json = array();
+		$json['e'] = 0;
+
+		$panel = Panel::find(Input::get('panel_id'));
+
+		if($panel->delete()) {
+			$json['e'] = 1;
+			$json['message'] = Lang::get('admin.message_delete');
+		} else {
+			$json['message'] = Lang::get('admin.went_wrong');
+		}
+
+		return Response::json($json);
+	}
+
 	/**
 	 * Re-order panels using the position and panel ID
 	 * When no panel ID given it reserves the given position

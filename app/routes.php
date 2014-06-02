@@ -78,6 +78,8 @@ Route::any('/admin/component/panel/ajax/active',  array('before' => 'admin', 'us
 
 Route::any('/admin/comment/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminCommentController@Delete'));
 
+Route::any('/admin/component/panel/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminComponentController@Delete'));
+
 Route::any('/admin/user/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminUserController@Delete'));
 
 Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminPhotoController@Delete'));
@@ -85,24 +87,6 @@ Route::any('/admin/photo/ajax/delete',  array('before' => 'admin', 'uses' => 'Ad
 Route::any('/admin/photo/ajax/getphotos',  array('before' => 'admin', 'uses' => 'AdminPhotoController@getPhotos'));
 
 Route::any('/admin/component/panel/ajax/delete',  array('before' => 'admin', 'uses' => 'AdminComponentController@Delete'));
-
-Route::get('/email', function() 
-{
-
-	$data = array();
-	$data['header'] = "Amcığa";
-	$data['content'] = ":P";
-
-	Mail::send('email.basic', $data, function($message)
-	{
-    	$message->to('ufokaradagli@gmail.com', 'John Smith')->subject('Welcome!');
-	});
-});
-
-Route::get('/test', function() {
-
-	
-});
 
 App::missing(function($exception) {
 	return '404';
