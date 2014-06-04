@@ -5,5 +5,3 @@ return array(
 	"need_login" => "You need to be logged in",
 	"leave_comment" => "Leave a comment."
 );
-
-?>
