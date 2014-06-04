@@ -16,6 +16,26 @@
 					</span>
 				</div>
 			</div>
+			<div class="form-group @if(isset($messages) && $messages->has('position')) has-error @elseif(isset($messages)) has-success @endif">
+				<label for="inputPosition" class="col-sm-2 control-label">Position</label>
+				<div class="col-sm-10">
+					{{ Form::select(
+						'position',
+						$positions,
+						Input::old('position') ? Input::old('position') : $panel->position,
+						array(
+							'class' => 'form-control',
+							'id' => 'inputPosition',
+							'placeholder' => 'Position',
+						)
+					)}}
+					<span class="help-block">
+					@if (isset($messages))
+						{{ $messages->first('position') }}
+					@endif
+					</span>
+				</div>
+			</div>
 			<div class="form-group @if(isset($messages) && $messages->has('type')) has-error @elseif(isset($messages)) has-success @endif">
 				<label for="inputType" class="col-sm-2 control-label">Type</label>
 				<div class="col-sm-10">

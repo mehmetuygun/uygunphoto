@@ -5,7 +5,7 @@ class AdminComponentController extends BaseController
 	public function panel()
 	{
 		$data = array(
-			'panels' => Panel::paginate(25),
+			'panels' => Panel::orderBy('position')->paginate(25),
 			'js' => array(
 				'js/jquery-1.11.0.min.js',
 				'bootstrap/js/bootstrap.min.js',
@@ -59,6 +59,7 @@ class AdminComponentController extends BaseController
 
 			$data['panel'] = $panel;
 			$data['images'] = $panel->getImageIds();
+			$data['positions'] = Panel::getPositionOptions($panel->position);
 			return View::make('admin/component_panel_edit')
 				->with($data);
 		}
@@ -71,6 +72,7 @@ class AdminComponentController extends BaseController
 			$panel = Panel::find($id);
 			$data['panel'] = $panel;
 			$data['images'] = $panel->getImageIds();
+			$data['positions'] = Panel::getPositionOptions($panel->position);
 			return View::make('admin/component_panel_edit')
 				->with($data);
 		}
@@ -81,6 +83,7 @@ class AdminComponentController extends BaseController
 		$panel = Panel::find($id);
 		$data['panel'] = $panel;
 		$data['images'] = $panel->getImageIds();
+		$data['positions'] = Panel::getPositionOptions($panel->position);
 
 		return View::make('admin/component_panel_edit')
 			->with($data);
@@ -196,8 +199,9 @@ class AdminComponentController extends BaseController
 	private function createUpdatePanel($panel)
 	{
 		$panel->title = Input::get('title');
-		$panel->position = 0;
+		$panel->position = Input::get('position');
 		$panel->type = Input::get('type');
+		$this->reorderPanels($panel->position, $panel->id);
 		if (!$panel->save()) {
 			return false;
 		}
@@ -239,6 +243,7 @@ class AdminComponentController extends BaseController
 				'css/ui-lightness/jquery-ui-1.10.4.custom.min.css',
 			),
 			'types' => Panel::getTypes(),
+			'positions' => Panel::getPositionOptions(),
 		);
 	}
 }
