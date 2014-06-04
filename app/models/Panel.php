@@ -9,21 +9,19 @@ class Panel extends Eloquent
 		return $this->hasMany('PanelImage');
 	}
 
-	public function types()
+	public static function getTypes()
 	{
 		return array(
 			1 => 'Custom',
 			2 => 'Most Commented',
 			3 => 'Latest Added',
-			);
+		);
 	}
 
-	public function getImagesString($id)
+	public function getImageIds()
 	{
-		$panelImages = PanelImage::select('image_id')
-			->where('panel_id', '=', $id)
-			->get()
-			->toArray();
+		$panelImages = $this->images->toArray();
+
 		$panelImageIds = array_map(function($var) {
 			return $var['image_id'];
 		}, $panelImages);

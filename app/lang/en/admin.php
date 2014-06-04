@@ -60,7 +60,7 @@ return array(
 	"component" => "Component",
 	"panel" => "Panel",
 	"manage_panels" => "Manage Panels",
-	"sort" => "Sort",
+	"position" => "Position",
 	"number_of_photos" => "Number of Photos",
 	"no_record_found" => "No Record Found",
 	"add" => "Add",

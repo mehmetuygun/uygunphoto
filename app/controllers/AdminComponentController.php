@@ -1,178 +1,89 @@
 <?php
 
-class AdminComponentController extends BaseController 
+class AdminComponentController extends BaseController
 {
 	public function panel()
-	{	
-		$data = array();
+	{
+		$data = array(
+			'panels' => Panel::paginate(25),
+			'js' => array(
+				'js/jquery-1.11.0.min.js',
+				'bootstrap/js/bootstrap.min.js',
+				'js/admin_panel.js',
+			),
+			'alert' => Session::get('alert.alert'),
+			'alert_message' => Session::get('alert.alert_message'),
+			'alert_type' => Session::get('alert.alert_type'),
+		);
 
-		$data['panels'] = Panel::paginate(25);
-
-		$data["js"] = array("js/jquery-1.11.0.min.js", "bootstrap/js/bootstrap.min.js", "js/admin_panel.js");
-
-		$data['alert'] = Session::get('alert.alert');
-		$data['alert_message'] = Session::get('alert.alert_message'); 
-		$data['alert_type'] = Session::get('alert.alert_type'); 
 		return View::make('admin/component_panel')->with($data);
-	}	
+	}
 
 	public function panelAdd()
-	{	
+	{
+		$data = $this->getPanelViewData();
+
+		// If request method is not post just load the view
+		if (!Request::isMethod('post')) {
+			return View::make('admin/component_panel_add')
+				->with($data);
+		}
+
+		$validator = $this->getPanelValidator();
+		if ($validator->fails()) {
+			$data['messages'] = $validator->messages();
+			Input::flash();
+			return View::make('admin/component_panel_add')
+				->with($data);
+		}
+
 		$panel = new Panel;
+		$this->createUpdatePanel($panel);
 
-		$data['js'] = array(
-			"js/jquery-1.11.0.min.js", 
-			"bootstrap/js/bootstrap.min.js", 
-			"js/admin_panel.js", 
-			"js/select2.min.js",
-			"js/jquery-ui-1.10.4.custom.min.js"
-		);
-		$data['css'] = array('css/select2.css', 'css/ui-lightness/jquery-ui-1.10.4.custom.min.css');
-		$data['types'] = $panel->types();
-
-		$success_message = array(
+		Session::flash('alert', array(
 			'alert' => 1,
 			'alert_message' => Lang::get('admin.alert_added_success'),
 			'alert_type' => 'alert-success',
-		);
+		));
 
-		if(Request::isMethod('post')) {
-
-			$rules = array(
-				'title' => 'required|alpha_dash|digits_between:2,64',
-			);
-
-
-			$label = array(
-				'title' => Lang::get('title'),
-			);
-
-			if(Input::get('type')) {
-				$rules['image'] = 'required';
-				$label['image'] = Lang::get('admin.select_photos');
-			}
-
-			$validator = Validator::make(Input::all(), $rules, array(), $label);
-
-			if ($validator->fails()) {
-				$data['messages'] = $validator->messages();
-				Input::flash();
-			} else {
-				$panel = new Panel;
-				$panel->title = Input::get('title');
-				$panel->position = 0;
-				$panel->type = Input::get('type');
-				if($panel->save() && Input::get('type')) {
-					$count = 1;
-					$values = Input::get('image');
-					$values = explode(',', $values);
-					foreach($values as $value) {
-						$PanelImage = new PanelImage;
-						$PanelImage->panel_id = $panel->id;
-						$PanelImage->image_id = $value;
-						$PanelImage->position = $count;
-						$count++;
-						if($PanelImage->save()) {
-							$PanelImageSave = true;
-						}
-					}
-					if($PanelImageSave) {
-						Session::flash('alert', $success_message);
-						return Redirect::action('AdminComponentController@panel', array(), 303);
-					}
-				}
-				Session::flash('alert', $success_message);
-				return Redirect::action('AdminComponentController@panel', array(), 303);
-			}
-
-		}
-
-		return View::make('admin/component_panel_add')->with($data);
+		return Redirect::action('AdminComponentController@panel');
 	}
 
 	public function panelEdit($id)
 	{
+		$data = $this->getPanelViewData();
 
-		$data['js'] = array(
-			"js/jquery-1.11.0.min.js", 
-			"bootstrap/js/bootstrap.min.js", 
-			"js/admin_panel.js", 
-			"js/select2.min.js",
-			"js/jquery-ui-1.10.4.custom.min.js"
-		);
+		// If request method is not post just load the view
+		if (!Request::isMethod('post')) {
+			$panel = Panel::find($id);
 
-		$data['css'] = array('css/select2.css', 'css/ui-lightness/jquery-ui-1.10.4.custom.min.css');
-		
+			$data['panel'] = $panel;
+			$data['images'] = $panel->getImageIds();
+			return View::make('admin/component_panel_edit')
+				->with($data);
+		}
 
-		if(Request::isMethod('post')) {
+		$validator = $this->getPanelValidator();
+		if ($validator->fails()) {
+			$data['messages'] = $validator->messages();
+			Input::flash();
 
-			$rules = array(
-				'title' => 'required|alpha_dash|digits_between:2,64',
-			);
-
-
-			$label = array(
-				'title' => Lang::get('title'),
-			);
-
-			if(Input::get('type')) {
-				$rules['image'] = 'required';
-				$label['image'] = Lang::get('admin.select_photos');
-			}
-
-			$validator = Validator::make(Input::all(), $rules, array(), $label);
-
-			if ($validator->fails()) {
-				$data['messages'] = $validator->messages();
-				Input::flash();
-			} else {
-				$panel = Panel::find($id);
-				$panel->title = Input::get('title');
-				$panel->position = 0;
-				$panel->type = Input::get('type');
-				if($panel->save() && Input::get('type')) {
-					if(Input::get('type') == 1) {
-						$count = 1;
-						$values = Input::get('image');
-						$values = explode(',', $values);
-						$PanelImageOld = PanelImage::Where('panel_id', '=', $panel->id);
-						$PanelImageOld->delete();
-						foreach($values as $value) {
-							$PanelImage = new PanelImage;
-							$PanelImage->panel_id = $panel->id;
-							$PanelImage->image_id = $value;
-							$PanelImage->position = $count;
-							$count++;
-							if($PanelImage->save()) {
-								$PanelImageSave = true;
-							}
-						}
-					}
-
-					if(Input::get('type') != 1) {
-						$PanelImageOld = PanelImage::Where('panel_id', '=', $panel->id);
-						$PanelImageOld->delete();
-						$PanelImageSave = true;
-					}
-
-					if($PanelImageSave) {
-						$data['alert'] = 1;
-						$data['alert_message'] = Lang::get('admin.alert_updated_success');
-						$data['alert_type'] = 'alert-success';
-
-					}
-				} // end of panel save
-			} // end of else 
-		} // end of post
+			$panel = Panel::find($id);
+			$data['panel'] = $panel;
+			$data['images'] = $panel->getImageIds();
+			return View::make('admin/component_panel_edit')
+				->with($data);
+		}
 
 		$panel = Panel::find($id);
+		$this->createUpdatePanel($panel);
 
-		$p = new Panel;
-
+		$panel = Panel::find($id);
 		$data['panel'] = $panel;
-		$data['types'] = $panel->types();
-		$data['images'] = $p->getImagesString($id);
-		return View::make('admin/component_panel_edit')->with($data);
+		$data['images'] = $panel->getImageIds();
+
+		return View::make('admin/component_panel_edit')
+			->with($data);
 	}
 
 	public function active()
@@ -250,5 +161,84 @@ class AdminComponentController extends BaseController
 
 		$panel->position = $position;
 		return $panel->save();
+	}
+
+	/**
+	 * Get validator instance to be used in panel add / edit
+	 *
+	 * @return Illuminate\Validation\Validator
+	 */
+	private function getPanelValidator()
+	{
+		$rules = array(
+			'title' => 'required|alpha_dash|digits_between:2,64',
+		);
+
+		$label = array(
+			'title' => Lang::get('title'),
+		);
+
+		if (Input::get('type') == 1) {
+			$rules['image'] = 'required';
+			$label['image'] = Lang::get('admin.select_photos');
+		}
+
+		return Validator::make(Input::all(), $rules, array(), $label);
+	}
+
+	/**
+	 * Create / Update Panel used in panel add /edit
+	 *
+	 * @param  Panel $panel  Panel to be modified
+	 *
+	 * @return bool          True if updated successfully
+	 */
+	private function createUpdatePanel($panel)
+	{
+		$panel->title = Input::get('title');
+		$panel->position = 0;
+		$panel->type = Input::get('type');
+		if (!$panel->save()) {
+			return false;
+		}
+
+		$panel->images()->delete();
+		if (Input::get('type') == 1) {
+			$count = 1;
+			$values = Input::get('image');
+			$values = explode(',', $values);
+			foreach ($values as $value) {
+				$panelImage = new PanelImage;
+				$panelImage->panel_id = $panel->id;
+				$panelImage->image_id = $value;
+				$panelImage->position = $count++;
+				$panelImage->save();
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Get data for add / edit views
+	 *
+	 * @return array Data to be sent to the view
+	 */
+	private function getPanelViewData()
+	{
+		return array(
+			'js' => array(
+				'js/jquery-1.11.0.min.js',
+				'bootstrap/js/bootstrap.min.js',
+				'js/admin_panel.js',
+				'js/select2.min.js',
+				'js/jquery-ui-1.10.4.custom.min.js',
+			),
+			'css' => array(
+				'css/select2.css',
+				'css/ui-lightness/jquery-ui-1.10.4.custom.min.css',
+			),
+			'types' => Panel::getTypes(),
+		);
 	}
 }
