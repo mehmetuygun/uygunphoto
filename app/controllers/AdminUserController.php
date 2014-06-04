@@ -69,15 +69,13 @@ class AdminUserController extends BaseController
 				$user->email = Input::get('email');
 				if($user->save()) {
 					Input::flash();
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.update_message');
 					$data['alert_type'] = "alert-success";
-					$data['alert_name'] = Lang::get('admin.message');
 				} else {
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.went_wrong');
 					$data['alert_type'] = "alert-danger";
-					$data['alert_name'] = Lang::get('admin.error');
 				}
 			}
 
@@ -126,15 +124,13 @@ class AdminUserController extends BaseController
 				$user->email = Input::get('email');
 				if($user->save()) {
 					Input::flash();
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.update_message');
 					$data['alert_type'] = "alert-success";
-					$data['alert_name'] = Lang::get('admin.message');
 				} else {
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.went_wrong');
 					$data['alert_type'] = "alert-danger";
-					$data['alert_name'] = Lang::get('admin.error');
 				}
 			}
 
@@ -148,7 +144,7 @@ class AdminUserController extends BaseController
 	{
 
 		$data = array();
-		$data['is_message'] = 0;
+		$data['alert'] = 0;
 
 		if(Request::isMethod('post')) {
 			$rules = array(
@@ -185,15 +181,13 @@ class AdminUserController extends BaseController
 				$user->password = Hash::make(Input::get('new_password'));
 				if($user->save()) {
 					Input::flash();
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.update_message');
 					$data['alert_type'] = "alert-success";
-					$data['alert_name'] = Lang::get('admin.message');
 				} else {
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.went_wrong');
 					$data['alert_type'] = "alert-danger";
-					$data['alert_name'] = Lang::get('admin.error');
 				}
 			}
 

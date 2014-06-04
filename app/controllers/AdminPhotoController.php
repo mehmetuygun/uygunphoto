@@ -69,15 +69,13 @@ class AdminPhotoController extends BaseController
 				$photo->active = Input::get('active');
 				if($photo->save()) {
 					Input::flash();
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.update_message');
 					$data['alert_type'] = "alert-success";
-					$data['alert_name'] = Lang::get('admin.message');
 				} else {
-					$data['is_message'] = true;
+					$data['alert'] = true;
 					$data['alert_message'] = Lang::get('admin.went_wrong');
 					$data['alert_type'] = "alert-danger";
-					$data['alert_name'] = Lang::get('admin.error');
 				}
 			}
 
