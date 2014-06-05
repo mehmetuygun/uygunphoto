@@ -32,8 +32,7 @@ class Panel extends Eloquent
 	/**
 	 * Get position options for the views
 	 *
-	 * @todo clean up
-	 * @param  integer $curPos Panels current position for edit view
+	 * @param  integer $curPos Current position of the panel being edited
 	 *
 	 * @return array           List of position options
 	 */
@@ -43,35 +42,32 @@ class Panel extends Eloquent
 			->get()
 			->toArray();
 
+		if (!$panelList) {
+			return array('At the beginning');
+		}
+
 		$options = array();
-		$getNext = false;
 		foreach ($panelList as $panel) {
+			$position = $panel['position'];
+			if (!empty($skipNext)) {
+				$skipNext = false;
+				continue;
+			}
 			if (!isset($minPos)) {
-				$minPos = $panel['position'];
-				if (isset($curPos) && $curPos == $minPos) {
-					$getNext = true;
-				}
+				$minPos = $position;
 			}
-			if ($getNext && $curPos != $panel['position']) {
-				$secondMin = $panel['position'];
-				$getNext = false;
+			if (isset($curPos) && $curPos == $position) {
+				$skipNext = true;
 			}
-			$options[$panel['position']] = "Before {$panel['title']}";
+			$options[$position] = "Before {$panel['title']}";
 		}
-		if (isset($minPos)) {
-			$options[$minPos] = 'At the Beginning';
-		}
-		if (isset($secondMin)) {
-			unset($options[$secondMin]);
-		}
-		if (isset($panel) && $panel['position'] != $curPos) {
-			$options[$panel['position']+1] = 'At the End';
+
+		$options[$minPos] = 'At the beginning';
+		if ($position != $curPos) {
+			$options[$position+1] = 'At the end';
 		}
 		if (isset($curPos)) {
 			$options[$curPos] = 'Keep current position';
-		}
-		if (!$options) {
-			$options = array('At the Beginning');
 		}
 
 		return $options;
