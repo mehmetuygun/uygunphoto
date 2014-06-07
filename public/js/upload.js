@@ -1,5 +1,12 @@
 var modal_body;
 $(document).ready(function(){
+    $('.bxslider').bxSlider({
+        minSlides: 1,
+        maxSlides: 4,
+        slideMargin: 10,
+        slideWidth: 300,
+        captions: true
+    });
     // Keep the default modal body in a variable
     // to revert it back when 'New' is clicked
     modal_body = $('#modal-body').html();
@@ -80,3 +87,4 @@ $(document).ready(function(){
         $("#inputFile").change(validateFile);
     });
 });
+

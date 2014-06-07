@@ -263,3 +263,20 @@ body {
 .banner > .panel-body {
     padding-bottom: 0;
 }
+/* */ 
+.panel-uygunphoto {
+    background-color: #292828;
+}
+
+.bxslider li {
+    background-color: rgb(56, 56, 56);
+}
+.panel-uygunphoto .panel-heading {
+    background-color: #222;
+}
+.panel-uygunphoto .panel-title {
+    color: #999;
+}
+.panel-image-content {
+    padding: 5px 5px;
+}

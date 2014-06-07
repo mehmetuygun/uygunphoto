@@ -8,6 +8,11 @@
     {{ HTML::style('css/style.css') }}
     {{ HTML::style('css/font-awesome.min.css') }}
     {{ HTML::style('css/bootstrap-social.css') }}
+    @if (isset($css))
+        @foreach ($css as $key)
+            {{HTML::style($key)}}
+        @endforeach
+    @endif
 </head>
 <body>
     <div id="wrap">
