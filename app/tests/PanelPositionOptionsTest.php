@@ -4,6 +4,13 @@ class PanelPositionOptionsTest extends TestCase
 {
 	public $panel;
 
+	public static function setUpBeforeClass()
+	{
+		parent::setUpBeforeClass();
+
+		DB::table('panel')->truncate();
+	}
+
 	public function setUp()
 	{
 		parent::setUp();
