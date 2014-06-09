@@ -3,6 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Zizaco\Entrust\HasRole;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 

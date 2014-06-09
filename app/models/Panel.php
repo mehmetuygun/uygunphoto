@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
 class Panel extends Eloquent 
 {
 	protected $table = 'panel';

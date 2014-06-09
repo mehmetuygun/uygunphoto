@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
 class PanelImage extends Eloquent 
 {
 	protected $table = 'panel_image';
