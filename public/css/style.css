@@ -245,7 +245,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     color: rgb(207, 207, 207);
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 .panel-image .panel-body {
     background-color: #111111;
@@ -275,8 +275,25 @@ body {
     background-color: #222;
 }
 .panel-uygunphoto .panel-title {
-    color: #999;
+    color: white;
+    font-weight: bold;
 }
 .panel-image-content {
     padding: 5px 5px;
+}
+.panel {
+    border: 1px;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
+}
+.panel-image-owner {
+    font-size: 12px;
+    color: gray;
+}
+.panel-image-owner a {
+    color: rgb(163, 163, 163);
+}
+.panel-image-owner a:hover {
+    color: rgb(209, 209, 209);
 }

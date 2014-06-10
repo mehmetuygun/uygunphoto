@@ -4,8 +4,8 @@ $(document).ready(function(){
         minSlides: 1,
         maxSlides: 4,
         slideMargin: 10,
-        slideWidth: 300,
-        captions: true
+        slideWidth: 278,
+        pager: false
     });
     // Keep the default modal body in a variable
     // to revert it back when 'New' is clicked
