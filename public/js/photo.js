@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 // $(window).resize(resize_photo);
 
-$(window).resize(comment);
+// $(window).resize(comment);
 
 // function comment() {
 //     var comment_box = $('.comment_box').height();
@@ -20,20 +20,20 @@ $(window).resize(comment);
 //     alert("testtt");
 // }
 
-function resize_photo() {
-    var jwindow = $(window);
-    var photo_content = $('#content #photo');
-    var web_image = $('.web_image');
+// function resize_photo() {
+//     var jwindow = $(window);
+//     var photo_content = $('#content #photo');
+//     var web_image = $('.web_image');
 
-    if (jwindow.width() > 768) {
-        var window_height = jwindow.height() - 160;
-        photo_content.height(window_height);
-        web_image.css('margin-top', (window_height - web_image.height()) / 2);
-    } else {
-        photo_content.height('auto');
-        web_image.css('margin-top', 0);
-    }
-}
+//     if (jwindow.width() > 768) {
+//         var window_height = jwindow.height() - 160;
+//         photo_content.height(window_height);
+//         web_image.css('margin-top', (window_height - web_image.height()) / 2);
+//     } else {
+//         photo_content.height('auto');
+//         web_image.css('margin-top', 0);
+//     }
+// }
 
 function comment_ajax() {
     var url = $('#url').val();

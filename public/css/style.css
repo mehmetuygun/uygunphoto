@@ -121,7 +121,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    max-height: 100%;
+    max-height: 462px;
 }
 
 #comment_box {
@@ -149,8 +149,10 @@ body {
     margin-right: 0;
     margin-left: 0;
     background-color: #222;
-    border: 1px solid white;
     max-height: 500px;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
 }
 
 #content #photo .col-xs-12, .col-sm-6, .col-md-8{
@@ -296,4 +298,16 @@ body {
 }
 .panel-image-owner a:hover {
     color: rgb(209, 209, 209);
+}
+.photo_detail {
+    background-color: rgb(68, 68, 68);
+    padding: 5px 5px;
+}
+.photo_detail_title {
+    color: rgb(223, 223, 223);
+    font-size: 16px;
+    font-weight: bold;
+}
+.panel-photo {
+    margin-bottom: 0;
 }
