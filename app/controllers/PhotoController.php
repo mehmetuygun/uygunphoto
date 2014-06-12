@@ -71,7 +71,7 @@ class PhotoController extends BaseController {
 			return Response::json(array('error' => Lang::get('error.image_not_exist')));
 		}
 
-		$comment_field = array()
+		$comment_field = array();
 
 		$comment = $this->comment;
 
