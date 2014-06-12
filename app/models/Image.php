@@ -19,7 +19,7 @@ class Image extends Eloquent {
 
 	public function upload($image_file)
 	{
-		if ($this->createThubmnail($image_file, $thumbnailName = uniqid(true)) 
+		if ($this->createThumbnail($image_file, $thumbnailName = uniqid(true)) 
 			&& $this->webImage($image_file, $webImageName = uniqid(true)) 
 			&& $this->original($image_file, $originalName = uniqid(true))
 		) {
@@ -39,7 +39,7 @@ class Image extends Eloquent {
 		return false;
 	}
 
-	public function createThubmnail($file, $fileName)
+	public function createThumbnail($file, $fileName)
 	{
 		$image = Image_lib::make($file->getRealPath());
 
