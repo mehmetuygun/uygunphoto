@@ -44,7 +44,11 @@ class PhotoController extends BaseController {
 
 	}
 
-	public function Comment()
+	/**
+	 * Add a new comment
+	 * @return json
+	 */
+	public function addComment()
 	{
 		if (!Auth::check()) {
 			return Response::json(array(
@@ -63,21 +67,27 @@ class PhotoController extends BaseController {
 			return Response::json(array('error' => $messages->first('description')));
 		}
 
-		$json = array();
+		if(! Image::find(Input::get('image_id'))) {
+			return Response::json(array('error' => Lang::get('error.image_not_exist')));
+		}
+
+		$comment_field = array()
+
 		$comment = $this->comment;
+
 		$comment->description = Input::get('description');
 		$comment->user_id = Auth::user()->id;
 		$comment->image_id = Input::get('image_id');
 
 		if ($comment->save()) {
 			$comment = Comment::find($comment->id);
-			$json['full_name'] = $comment->user->first_name.' '.$comment->user->last_name;
-			$json['comment_description'] = $comment->description;
-			$json['created_at'] = $comment->created_at;
+			$comment_field['full_name'] = $comment->user->first_name.' '.$comment->user->last_name;
+			$comment_field['comment_description'] = $comment->description;
+			$comment_field['created_at'] = $comment->created_at;
 		} else {
-			$json['error'] = Lang::get('error.wrong');
+			$comment_field['error'] = Lang::get('error.wrong');
 		}
 
-		return Response::json($json);
+		return Response::json($comment_field);
 	}
 }

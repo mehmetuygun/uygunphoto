@@ -23,7 +23,7 @@ Route::get('/photo/{id}', array('before' => 'image', 'uses' => 'PhotoController@
 
 Route::get('/profile/{id}', array('before' => 'profile', 'uses' => 'PhotoController@Profile'));
 
-Route::post('/ajax/comment', 'PhotoController@Comment');
+Route::post('/ajax/comment', 'PhotoController@addComment');
 
 Route::get('/logout', function()
 {
