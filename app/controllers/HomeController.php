@@ -25,6 +25,7 @@ class HomeController extends BaseController {
 				"js/xhr2.js", 
 				"js/upload.js",
 				'js/jquery.bxslider.min.js',
+				'js/slider.js',
 				),
 			'css' => array('css/jquery.bxslider.css'),
 		);

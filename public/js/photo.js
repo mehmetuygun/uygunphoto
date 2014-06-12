@@ -56,10 +56,11 @@ function do_action(data) {
     html +=  '<div class="media-body">';
     html +=      '<h5 class="media-heading">';
     html +=      '<a href="#">'+data.full_name+'</a>';
+    html += '<span class="sub-text">'+data.created_at.date+'</a>';
     html += '</h5>';
-    html += '<p>'+data.comment_description+'</p>';
+    html += '<span class="comment-text">'+data.comment_description+'</span>';
     html +='</div>';
     html += '</div>';
-    $('.comment_frame').prepend(html);
+    $('.comment-box').prepend(html);
     $('#comment_form #comment_description').val('');
 }

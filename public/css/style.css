@@ -177,25 +177,6 @@ body {
   color: #fff;
 }
 
-#comment_description {
-    resize: none;
-    background-color: black;
-    color: white;
-}
-
-#comment_description::-webkit-input-placeholder {
-    color: white;
-}    
-#comment_description:-moz-placeholder {
-    color: white;
-}
-#comment_description::-moz-placeholder {
-    color: white;
-}    
-#comment_description:-ms-input-placeholder {
-    color: white;
-}
-
 .comment_frame a{
     color: gray;
 }
@@ -310,4 +291,18 @@ body {
 }
 .panel-photo {
     margin-bottom: 0;
+}
+.panel-comment {
+    margin-top: 20px;
+}
+.comment-text {
+    font-size: 12px;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.comment-box {
+    margin-top: 10px;
 }

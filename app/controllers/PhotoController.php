@@ -52,6 +52,17 @@ class PhotoController extends BaseController {
 			));
 		}
 
+		$validator = Validator::make(
+			array('description' => Input::get('description')),
+			array('description' => 'required:max:140')
+		);
+
+		$messages = $validator->messages();
+
+		if($validator->fails()) {
+			return Response::json(array('error' => $messages->first('description')));
+		}
+
 		$json = array();
 		$comment = $this->comment;
 		$comment->description = Input::get('description');
@@ -59,8 +70,8 @@ class PhotoController extends BaseController {
 		$comment->image_id = Input::get('image_id');
 
 		if ($comment->save()) {
-			$user = $comment->user;
-			$json['full_name'] = $user->first_name.' '.$user->last_name;
+			$comment = Comment::find($comment->id);
+			$json['full_name'] = $comment->user->first_name.' '.$comment->user->last_name;
 			$json['comment_description'] = $comment->description;
 			$json['created_at'] = $comment->created_at;
 		} else {

@@ -1,12 +1,5 @@
 var modal_body;
 $(document).ready(function(){
-    $('.bxslider').bxSlider({
-        minSlides: 1,
-        maxSlides: 4,
-        slideMargin: 10,
-        slideWidth: 278,
-        pager: false
-    });
     // Keep the default modal body in a variable
     // to revert it back when 'New' is clicked
     modal_body = $('#modal-body').html();
