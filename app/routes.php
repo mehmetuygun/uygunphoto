@@ -25,6 +25,8 @@ Route::get('/profile/{id}', array('before' => 'profile', 'uses' => 'PhotoControl
 
 Route::post('/ajax/comment', 'PhotoController@addComment');
 
+Route::any('/ajax/load_more_comment', 'photoController@loadMoreComment');
+
 Route::get('/logout', function()
 {
 	Auth::logout();

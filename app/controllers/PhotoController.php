@@ -24,7 +24,19 @@ class PhotoController extends BaseController {
 
 		$data['image'] = $image;
 		$data['user'] = $image->user;
-		$data['comment'] = $image->comment;
+		$data['comments'] = $this->image->find($id)
+							->join('user', 'user.id', '=', 'image.user_id')
+							->join('comment', 'comment.image_id', '=', 'image.id')
+							->select('comment.id', 
+								'comment.description', 
+								'comment.created_at', 
+								'user.first_name', 
+								'user.last_name',
+								'user.id')
+							->orderBy('comment.created_at', 'desc')
+							->take(5)
+							->skip(0)
+							->get();
 
 		return View::make('photo')->with($data);
 	}
@@ -78,6 +90,7 @@ class PhotoController extends BaseController {
 		$comment->description = Input::get('description');
 		$comment->user_id = Auth::user()->id;
 		$comment->image_id = Input::get('image_id');
+		$comment->active = 1;
 
 		if ($comment->save()) {
 			$comment = Comment::find($comment->id);
@@ -89,5 +102,47 @@ class PhotoController extends BaseController {
 		}
 
 		return Response::json($comment_field);
+	}
+
+	/**
+	 * Load more comment
+	 * @return json
+	 */
+	public function loadMoreComment()
+	{
+		$validator = Validator::make(
+			array(
+				'page_number' => Input::get('page_number'),
+				'image_id' => Input::get('image_id'),
+			),
+			array(
+				'page_number' => 'Required:integer',
+				'image_id' => 'exists:image,id',
+			)
+		);
+
+		$messages = $validator->messages();
+
+		if($validator->fails()) {
+			return Response::json(array('error' => $messages->all()));
+		}
+
+		$skip = (5 * Input::get('page_number') - 5);
+
+		$comments = Image::find(Input::get('image_id'))
+					->join('user', 'user.id', '=', 'image.user_id')
+					->join('comment', 'comment.image_id', '=', 'image.id')
+					->select('comment.id', 
+						'comment.description', 
+						'comment.created_at', 
+						'user.first_name', 
+						'user.last_name',
+						'user.id')
+					->orderBy('comment.created_at', 'desc')
+					->take(5)
+					->skip($skip)
+					->get();
+
+		return Response::json($comments);
 	}
 }

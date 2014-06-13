@@ -28,14 +28,14 @@
                 
             </form>
             <div class="comment-box">
-                @foreach ($image->comment as $comment)
+                @foreach ($comments as $comment)
                     <div class="media">
-                        <a class="pull-left" href="{{ url('/profile/'.$image->user->id) }}">
+                        <a class="pull-left" href="{{ url('/profile/'.$comment->id) }}">
                             <img class="media-object" src="{{ url('/img/avatar/user-32.png') }}" >
                         </a>
                         <div class="media-body">
                             <h5 class="media-heading">
-                                <a href="">{{ $comment->user->first_name.' '.$comment->user->last_name }}
+                                <a href="">{{ $comment->first_name.' '.$comment->last_name }}
                                 </a> 
                                 <span class="sub-text">{{ $comment->created_at }}</span>
                             </h5>
@@ -44,9 +44,11 @@
                     </div>   
                 @endforeach
             </div>
-        </div>
-        <div class="panel-footer">
-        footer
+            <form id="load_more_comments_form">
+                <input type="hidden" name="image_id" value="{{ $image->id }}">
+                <input type="hidden" name="page_number" value="2" id="page_number">
+            </form>
+            <button type="button" class="btn btn-info" style="width:100%" id="load_more_comments">{{ trans('common.load_more') }}</button>
         </div>
     </div>
 </div>
