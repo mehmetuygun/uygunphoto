@@ -18,6 +18,8 @@ class PermissionRoleSeeder extends Seeder
     );
 
     private $roleIds;
+    private $readOnlyPermissionIds = array();
+    private $adminPermissionIds = array();
 
     public function run()
     {
@@ -27,6 +29,7 @@ class PermissionRoleSeeder extends Seeder
 
         $this->createRoles();
         $this->createAdminPermissions();
+        $this->assignAdminPermissions();
     }
 
     private function createAdminPermissions()
@@ -39,22 +42,11 @@ class PermissionRoleSeeder extends Seeder
                 'display_name' => $permName
             ));
 
-            if ($mode != 'read') {
-                DB::table('permission_role')->insert(array(
-                    'permission_id' => $permission->id,
-                    'role_id' => $this->roleIds['admin']
-                ));
-                continue;
-            }
+            $this->adminPermissionIds[] = $permission->id;
 
-            DB::table('permission_role')->insert(array(
-                'permission_id' => $permission->id,
-                'role_id' => $this->roleIds['admin']
-            ));
-            DB::table('permission_role')->insert(array(
-                'permission_id' => $permission->id,
-                'role_id' => $this->roleIds['admin_read_only']
-            ));
+            if ($mode == 'read') {
+                $this->readOnlyPermissionIds[] = $permission->id;
+            }
         }
     }
 
@@ -64,5 +56,21 @@ class PermissionRoleSeeder extends Seeder
             $role = Role::create(array('name' => $roleName));
             $this->roleIds[$roleName] = $role->id;
         }
+    }
+
+    private function assignAdminPermissions()
+    {
+        $admin = Role::where('name', 'admin')
+            ->first();
+
+        $admin->perms()
+            ->sync($this->adminPermissionIds);
+
+
+        $readOnlyAdmin = Role::where('name', 'admin_read_only')
+            ->first();
+
+        $readOnlyAdmin->perms()
+            ->sync($this->readOnlyPermissionIds);
     }
 }
