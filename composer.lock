@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ac45d59f03944e901527010f1d74517",
+    "hash": "57aef9950e6d812cb69674716e1ce956",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -614,16 +614,16 @@
         },
         {
             "name": "intervention/image",
-            "version": "dev-master",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "8692a77fb684515303f2a1d5e07d7108aaf589c8"
+                "reference": "bbdb310dfaa76c9756509d90f6badaf157117c28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/8692a77fb684515303f2a1d5e07d7108aaf589c8",
-                "reference": "8692a77fb684515303f2a1d5e07d7108aaf589c8",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/bbdb310dfaa76c9756509d90f6badaf157117c28",
+                "reference": "bbdb310dfaa76c9756509d90f6badaf157117c28",
                 "shasum": ""
             },
             "require": {
@@ -668,7 +668,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2014-05-31 09:37:00"
+            "time": "2014-06-08 21:56:29"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -1148,12 +1148,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "0ea31d9b65d49a8661e93bec19f44e989bd34c69"
+                "reference": "76c9692908a6c25601df2db373043fcbb335332e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/0ea31d9b65d49a8661e93bec19f44e989bd34c69",
-                "reference": "0ea31d9b65d49a8661e93bec19f44e989bd34c69",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/76c9692908a6c25601df2db373043fcbb335332e",
+                "reference": "76c9692908a6c25601df2db373043fcbb335332e",
                 "shasum": ""
             },
             "require": {
@@ -1178,8 +1178,7 @@
                     "Crypt": "phpseclib/",
                     "File": "phpseclib/",
                     "Math": "phpseclib/",
-                    "Net": "phpseclib/",
-                    "System": "phpseclib/"
+                    "Net": "phpseclib/"
                 },
                 "files": [
                     "phpseclib/Crypt/Random.php"
@@ -1235,7 +1234,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-02-28 16:05:05"
+            "time": "2014-02-23 01:03:22"
         },
         {
             "name": "predis/predis",
@@ -2359,8 +2358,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "zizaco/entrust": 20,
-        "laravelbook/ardent": 20,
-        "intervention/image": 20
+        "laravelbook/ardent": 20
     },
     "platform": [],
     "platform-dev": []

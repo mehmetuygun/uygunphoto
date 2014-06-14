@@ -7,7 +7,7 @@
 		"laravel/framework": "4.1.*",
 		"zizaco/entrust": "dev-master",
 		"laravelbook/ardent": "dev-master",
-		"intervention/image": "dev-master",
+		"intervention/image": "2.0.*",
 		"doctrine/dbal": "2.4.*"
 	},
 	"require-dev": {
