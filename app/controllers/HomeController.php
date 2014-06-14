@@ -96,13 +96,14 @@ class HomeController extends BaseController {
 		$data = array();
 
 		if (Request::isMethod('post')) {
-
 			$input = array(
 				"email" => Input::get('email'),
 				"password" => Input::get('password')
 			);
 
-			if(Auth::attempt($input)) {
+			$remember = Input::has('remember_me') ? true : false;
+
+			if(Auth::attempt($input, $remember)) {
 				return Redirect::action('HomeController@Home', array(), 303);
 			} else {
 				$data['error'] = 1;

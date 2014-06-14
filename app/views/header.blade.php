@@ -42,12 +42,12 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#">{{ trans('general.profile') }}</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">{{ trans('general.logout') }}</a></li>
+                                <li><a href="{{ url('logout') }}">{{ trans('general.logout') }}</a></li>
                             </ul>
                         </li>
                         @else 
                         <li><a href="{{ url('register') }}">{{ trans('general.register') }}</a></li>
-                        <li><a href="{{ url('login') }}">{{ trans('general.login') }}</a></li>
+                        <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('general.login') }}</a></li>
                         @endif
                     </ul>
                 </div>

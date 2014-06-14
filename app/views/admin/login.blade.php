@@ -18,34 +18,7 @@
 				{{ $error }}					
 				</div>
 			@endif
-		 	<form action="" method="POST" role="form">
-		 		<div class="form-group @if (isset($messages) && $messages->has('email')) has-error @endif">
-		 			<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-			 			<input type="text" class="form-control" name="email" placeholder="{{ trans('form.email') }}">
-		 			</div>
-		 			<span class="help-block">
-		 			@if (isset($messages) && $messages->has('email'))
-						{{$messages->first('email')}}
-		 			@endif
-		 			</span>
-		 		</div>
-		 		<div class="form-group @if (isset($messages) && $messages->has('password')) has-error @endif">
-		 			<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-			 			<input type="password" class="form-control" name="password" placeholder="{{ trans('form.password') }}">
-		 			</div>
-		 			<span class="help-block">
-		 			@if (isset($messages) && $messages->has('password'))
-						{{$messages->first('password')}}
-		 			@endif
-		 			</span>
-		 		</div>
-	 			<div class="form-group">
- 					<button type="submit" class="btn btn-success">{{ trans('general.login') }}</button>
-	 			</div>
- 					<a href="{{url('/admin/forgot_password')}}">{{ trans('general.forget_password') }}</a>
-		 	</form>
+			@include('form.login')
 		</div>
 	</div>
 </body>

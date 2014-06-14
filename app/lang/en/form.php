@@ -11,5 +11,6 @@ return array(
 	"close" => "Close",
 	"status" => "Status",
 	"new" => "New",
-	"photo" => "Photo"
+	"photo" => "Photo",
+	'remember_me' => 'Remember me'
 );

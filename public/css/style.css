@@ -2,7 +2,7 @@ html,
 body {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
-    background-color: #313131;
+    background-color: teal;
 }
 
 /* Wrapper for page content to push down footer */
@@ -34,7 +34,7 @@ body {
     padding: 15px;
 }
 
-.img_gallery li {
+/*.img_gallery li {
     width: 200px;
     min-height: 250px;
     border: 1px solid #000;
@@ -45,19 +45,23 @@ body {
     zoom: 1;
     *display: inline;
     _height: 250px;
-}
-.thumbnail {
+}*/
+
+/*.thumbnail {
     width: 170px;
     height: 170px;
 }
+
 .photo-frame {
     background-color: #222;
     padding-top: 20px;
     border-radius: 4px;
 }
+
 .photo_info {
     color: gray;
 }
+
 @media screen and (max-width: 400px) {
     .thumbnail {
         width: 90px;
@@ -67,7 +71,7 @@ body {
         width: 80px;
         height: 80px;
     }
-}
+}*/
 
 @media screen and (min-width: 767px) {
     #photo, #comment_box {
@@ -75,14 +79,15 @@ body {
     }
 }
 
-.load_more {
+/*.load_more {
     width: 100%;
-}
+}*/
 
 .panel-black {
     border-radius: 4px;
     background-color: #101010;
 }
+
 .comment_button {
     margin-top: 15px;
 }
@@ -91,9 +96,11 @@ body {
     padding: 5px;
     width: 100%;
 }
+
 .comment_body {
     font-size: 12px;
 }
+
 .comment_time {
     font-size: 11px;
     color: gray;
@@ -106,16 +113,12 @@ body {
 	margin-top: 60px;
 }
 
-.centered-form .panel{
-	background: rgba(255, 255, 255, 0.8);
-	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-}
-
 .scrollableComment {
     max-height: 100%;
     height: auto;
     overflow-y: scroll;
 }
+
 .web_image {
     max-width: 100%;
     display: block;
@@ -264,12 +267,7 @@ body {
 .panel-image-content {
     padding: 5px 5px;
 }
-.panel {
-    border: 1px;
-    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
-    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
-    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.53);
-}
+
 .panel-image-owner {
     font-size: 12px;
     color: gray;

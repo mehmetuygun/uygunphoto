@@ -1,6 +1,6 @@
 @include('header')
 @foreach ($panels as $panel)
-<div class="panel panel-default panel-uygunphoto">
+<div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">{{ $panel->title }}</h3>
 	</div>

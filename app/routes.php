@@ -44,6 +44,12 @@ Route::get('/admin/logout', function()
 	return Redirect::to('/admin/login');
 });
 
+Route::get('/logout', function()
+{
+	Auth::logout();
+	return Redirect::to('/login');
+});
+
 Route::any('/admin/login', array('after' => 'admin', 'uses' => 'AdminController@Login'));
 
 Route::get('/admin/dashboard',  array('before' => 'admin', 'uses' => 'AdminController@Dashboard'));
