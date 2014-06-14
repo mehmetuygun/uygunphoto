@@ -45,7 +45,7 @@ class Image extends Eloquent {
 
 		$this->_thumbnail_name = $fileName.'.jpg';
 
-		if($image->grab(450, 300)->save(base_path().'/public/img/thumbnail/'.$fileName.'.jpg'))
+		if($image->fit(450, 300)->save(base_path().'/public/img/thumbnail/'.$fileName.'.jpg'))
 			return true;
 
 		$this->error = Lang::get('error.wrong');
@@ -58,21 +58,21 @@ class Image extends Eloquent {
 
 		$this->_web_name = $fileName.'.jpg';
 
-		if($image->width > $image->height) {
-			$ratio = $image->width / $image->height;
+		if($image->width() > $image->height()) {
+			$ratio = $image->width() / $image->height();
 		} else {
-			$ratio = $image->height / $image->width;
+			$ratio = $image->height() / $image->width();
 		}
 
-		if($image->width > 1024) {
+		if($image->width() > 1024) {
 			$img_width = 1024;
 			$img_height = 1024 / $ratio;
-		} elseif($image->height > 1024){
+		} elseif($image->height() > 1024){
 			$img_width = 1024 / $ratio;
-			$img_height = $image->height;
+			$img_height = $image->height();
 		} else {
-			$img_width = $image->width;
-			$img_height = $image->height;
+			$img_width = $image->width();
+			$img_height = $image->height();
 		}
 
 		$img_height = round($img_height);
